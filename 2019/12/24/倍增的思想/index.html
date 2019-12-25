@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>倍增的思想 | jzq&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目：P1909 买铅笔P老师需要去商店买n支铅笔作为小朋友们参加NOIP的礼物。她发现商店一共有 33种包装的铅笔，不同包装内的铅笔数量有可能不同，价格也有可能不同。为了公平起 见，P老师决定只买同一种包装的铅笔。 商店不允许将铅笔的包装拆开，因此P老师可能需要购买超过nn支铅笔才够给小朋 友们发礼物。 现在P老师想知道，在商店每种包装的数量都足够的情况下，要买够至少nn支铅笔最少需要花费多少钱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="倍增的思想">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;24&#x2F;%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3&#x2F;index.html">
+<meta property="og:site_name" content="jzq&#39;s blog">
+<meta property="og:description" content="题目：P1909 买铅笔P老师需要去商店买n支铅笔作为小朋友们参加NOIP的礼物。她发现商店一共有 33种包装的铅笔，不同包装内的铅笔数量有可能不同，价格也有可能不同。为了公平起 见，P老师决定只买同一种包装的铅笔。 商店不允许将铅笔的包装拆开，因此P老师可能需要购买超过nn支铅笔才够给小朋 友们发礼物。 现在P老师想知道，在商店每种包装的数量都足够的情况下，要买够至少nn支铅笔最少需要花费多少钱">
+<meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2019-12-24T08:12:18.118Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="jzq&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">jzq&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-倍增的思想" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/" class="article-date">
+  <time datetime="2019-12-24T08:09:43.000Z" itemprop="datePublished">2019-12-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      倍增的思想
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>题目：P1909 买铅笔<br>P老师需要去商店买n支铅笔作为小朋友们参加NOIP的礼物。她发现商店一共有 33种包装的铅笔，不同包装内的铅笔数量有可能不同，价格也有可能不同。为了公平起 见，P老师决定只买同一种包装的铅笔。</p>
+<p>商店不允许将铅笔的包装拆开，因此P老师可能需要购买超过nn支铅笔才够给小朋 友们发礼物。</p>
+<p>现在P老师想知道，在商店每种包装的数量都足够的情况下，要买够至少nn支铅笔最少需要花费多少钱。</p>
+<p>输入格式<br>第一行包含一个正整数nn，表示需要的铅笔数量。</p>
+<p>接下来三行，每行用22个正整数描述一种包装的铅笔：其中第11个整数表示这种 包装内铅笔的数量，第22个整数表示这种包装的价格。</p>
+<p>保证所有的77个数都是不超过1000010000的正整数。<br>此题是一个简单的模拟，可运用倍增的思想，能大幅度减少运算时间。</p>
+<pre><code class="&gt;">#include&lt;cstdio&gt;
+    using namespace std;
+    int i,j,k,n,m,w,ans;
+    int main()
+    {
+        scanf(&quot;%d&quot;,&amp;n);
+        for(i=0;i&lt;3;i++){
+            scanf(&quot;%d%d&quot;,&amp;j,&amp;k);m=j;w=k;//输入并存下初始的价格与数量
+            while(j&lt;n){j&lt;&lt;=1;k&lt;&lt;=1;}//价格与数量不断*2直到数量大于n
+            while(j&gt;n){j-=m;k-=w;}//*2有可能导致买太多了，减去一些
+            while(j&lt;n){j+=m;k+=w;}//减去之后又可能太少了，加上一些
+            //其实就是大幅度地上调，然后做一些微调
+            if(k&lt;ans||ans==0)ans=k;//判断是否是最小花费
+        }
+        printf(&quot;%d\n&quot;,ans);
+        return 0;//输出并返回
+    }</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/" data-id="ck4kz7ti10002fktfcpxk7btu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">由于未初始化导致的本地运行和oj运行答案不一致</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/">倍增的思想</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/">由于未初始化导致的本地运行和oj运行答案不一致</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/11/%E9%99%A4%E6%95%B0%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BF%A9%E4%B8%AA%E6%95%B0%E5%AD%97%E7%9A%84%E5%90%84%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84/">除数，判断俩个数字的各个数字是否有重复的</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/">有关字符串比较函数的拓展</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/">[对于多组输入且每个输入对应一个输出的结果]</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Jiang zq<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
