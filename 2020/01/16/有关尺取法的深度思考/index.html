@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>有关尺取法的深度思考 | jzq&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目：链接：https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;3570&#x2F;B来源：牛客网 “一刀建林流泪，两刀马云都得跪。”摆在你面前的一长条切糕，你想尝到切糕里面所有的果仁，什么核桃呀，杏仁呀，巴旦木呀…但因为切糕很贵，你要选取一段连续的切糕，使得你能吃到这份切糕里所有的果仁，切记切糕贵，所以要选取最短的长度并且要包含所有的果仁，这里的果仁可以简单的看做a果仁，b果仁，c果仁">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有关尺取法的深度思考">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;16&#x2F;%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83&#x2F;index.html">
+<meta property="og:site_name" content="jzq&#39;s blog">
+<meta property="og:description" content="题目：链接：https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;3570&#x2F;B来源：牛客网 “一刀建林流泪，两刀马云都得跪。”摆在你面前的一长条切糕，你想尝到切糕里面所有的果仁，什么核桃呀，杏仁呀，巴旦木呀…但因为切糕很贵，你要选取一段连续的切糕，使得你能吃到这份切糕里所有的果仁，切记切糕贵，所以要选取最短的长度并且要包含所有的果仁，这里的果仁可以简单的看做a果仁，b果仁，c果仁">
+<meta property="og:locale" content="CN">
+<meta property="og:updated_time" content="2020-01-16T04:03:10.535Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="jzq&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">jzq&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-有关尺取法的深度思考" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/" class="article-date">
+  <time datetime="2020-01-16T03:23:12.000Z" itemprop="datePublished">2020-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      有关尺取法的深度思考
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>题目：<br>链接：<a href="https://ac.nowcoder.com/acm/contest/3570/B" target="_blank" rel="noopener">https://ac.nowcoder.com/acm/contest/3570/B</a><br>来源：牛客网</p>
+<p>“一刀建林流泪，两刀马云都得跪。”摆在你面前的一长条切糕，你想尝到切糕里面所有的果仁，什么核桃呀，杏仁呀，巴旦木呀…但因为切糕很贵，你要选取一段连续的切糕，使得你能吃到这份切糕里所有的果仁，切记切糕贵，所以要选取最短的长度并且要包含所有的果仁，这里的果仁可以简单的看做a果仁，b果仁，c果仁….，输出能包含所有果仁的最短长度。换句话说出现的果仁都要出现在你所选的区间里面，输出这个区间的最短长度。</p>
+<p>输入描述:<br>第一行包含整数n(1≤n≤100 000)——切糕的长度。<br>第二行包含长度为n的字符串，它由英文字母表中的大写字母和小写字母组成。<br>输出描述:<br>输出一个整数，表示最小选取的长度。</p>
+<p>本人之前对尺取法的理解很是浅显，只知道先扩大右端点，再改变左端点。但对于具体的思路很难想到。</p>
+<p>关键：将区间一直改变，让它一直满足题目所给的要求，但是让区间不在改变的条件很关键，本题的这个关键就是左端点的字母在左端点以后都没有出现过。（是左端点以后而不是选择的区间里面，因为会出现如abbcccccabc的情况）</p>
+<p>设满足题意即只要能让所有的字母出现至少一次的条件是a，该区间最短为b。<br>我们首先将区间左右端点都设为0，扩大右端点，当所有字母都出现后停止扩大，b即为该区间长度，此时右端点有可能在总区间的各个位置，然后我们扩大左端点，从现在的左端点位置进行判断，如果这个左端点在选择的区间中出现了不止一次，那么直接扩大左端点，无需其他任何操作。如果这个左端点只出现了一次，我们假设去掉它，再扩大右端点，如果在此时的右端点以后的各个字母已经没有该个被删去的字母，那么最优解已经找到；如果在此时的右端点以后的各个字母还有该个被删去的左端点，那么现在的区间即为【被删去的左端点+1，右端点后的下一个该字母】，这时，我们判断这个新区间与原来那个最短区间b的大小，选择最优解。此后将以上过程循环，直到删去左端点时右端点以后找不到该字母。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,temp=0,i,ans;char s[100010];int a[200];</span><br><span class="line">    memset(a,0,sizeof(a));</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    scanf(&quot;%s&quot;,s);</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">      a[s[i]]=1;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=65;i&lt;=122;i++)</span><br><span class="line">    if(a[i]) temp++;</span><br><span class="line">	memset(a,0,sizeof(a));</span><br><span class="line">    int l=0,r=0,now=1;ans=n+1;</span><br><span class="line">	a[s[l]]=1;</span><br><span class="line">	while(1)</span><br><span class="line">	 &#123;</span><br><span class="line">		 while(r&lt;n-1)</span><br><span class="line">		 &#123;</span><br><span class="line">		   if(now==temp) break;</span><br><span class="line">		   r++;</span><br><span class="line">		   if(!a[s[r]]) &#123;now++;&#125;</span><br><span class="line">		   a[s[r]]++;</span><br><span class="line"></span><br><span class="line">		 &#125;</span><br><span class="line">		 if(now&lt;temp) break;//左边的端点去后，在之后再也找不到了。</span><br><span class="line">		 if(r-l+1&lt;ans) ans=r-l+1;//ans等于选择的区间长度，最大为n</span><br><span class="line">		 if((--a[s[l]])==0) now--;//从左端点开始判断其是否在选择的区间中只出现了1次</span><br><span class="line">		 l++;</span><br><span class="line">	 &#125;</span><br><span class="line">    printf(&quot;%d\n&quot;,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/" data-id="ck5hy3h55000948tf0oe231f7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">倍增的思想</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">有关尺取法的深度思考</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/">倍增的思想</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/">由于未初始化导致的本地运行和oj运行答案不一致</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/11/%E9%99%A4%E6%95%B0%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BF%A9%E4%B8%AA%E6%95%B0%E5%AD%97%E7%9A%84%E5%90%84%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84/">除数，判断俩个数字的各个数字是否有重复的</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/">有关字符串比较函数的拓展</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Jiang zq<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

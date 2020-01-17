@@ -5,16 +5,16 @@
   
 
   
-  <title>[字符串相关题目] | jzq&#39;s blog</title>
+  <title>字符串相关题目 | jzq&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="第一块题目：题目描述编写一程序，用于统计从键盘输入的字符串中的元音字母（a，A，e，E，i，I，o，O，u，U）的个数。输入每行输入一字符串，串长不超过255。输出输出对应字符串中元音字母的个数。样例输入 Copyabcioefgaeioak akkkksd样例输出 Copy352（一开始对题目的输入输出要求理解错误，认为是先输入一堆数据后统一输出，如果这道题像我这样理解的话，则输入应该为一个二维">
+  <meta name="description" content="title: ‘[字符串相关题目]’date: 2019-11-04 22:14:55tags:                               第一块题目：题目描述编写一程序，用于统计从键盘输入的字符串中的元音字母（a，A，e，E，i，I，o，O，u，U）的个数。输入每行输入一字符串，串长不超过255。输出输出对应字符串中元音字母的个数。样例输入 Copyabcioefgaeioak">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[字符串相关题目]">
+<meta property="og:title" content="字符串相关题目">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;04&#x2F;%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE&#x2F;index.html">
 <meta property="og:site_name" content="jzq&#39;s blog">
-<meta property="og:description" content="第一块题目：题目描述编写一程序，用于统计从键盘输入的字符串中的元音字母（a，A，e，E，i，I，o，O，u，U）的个数。输入每行输入一字符串，串长不超过255。输出输出对应字符串中元音字母的个数。样例输入 Copyabcioefgaeioak akkkksd样例输出 Copy352（一开始对题目的输入输出要求理解错误，认为是先输入一堆数据后统一输出，如果这道题像我这样理解的话，则输入应该为一个二维">
+<meta property="og:description" content="title: ‘[字符串相关题目]’date: 2019-11-04 22:14:55tags:                               第一块题目：题目描述编写一程序，用于统计从键盘输入的字符串中的元音字母（a，A，e，E，i，I，o，O，u，U）的个数。输入每行输入一字符串，串长不超过255。输出输出对应字符串中元音字母的个数。样例输入 Copyabcioefgaeioak">
 <meta property="og:locale" content="CN">
-<meta property="og:updated_time" content="2019-11-04T15:36:37.756Z">
+<meta property="og:updated_time" content="2020-01-16T04:10:31.933Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="jzq&#39;s blog" type="application/atom+xml">
@@ -65,7 +65,7 @@
         <section id="main"><article id="post-字符串相关题目" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" class="article-date">
-  <time datetime="2019-11-04T14:14:55.000Z" itemprop="datePublished">2019-11-04</time>
+  <time datetime="2019-11-04T14:14:55.520Z" itemprop="datePublished">2019-11-04</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      [字符串相关题目]
+      字符串相关题目
     </h1>
   
 
@@ -84,12 +84,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>第一块</code></pre><p>题目：题目描述<br>编写一程序，用于统计从键盘输入的字符串中的元音字母（a，A，e，E，i，I，o，O，u，U）的个数。<br>输入<br>每行输入一字符串，串长不超过255。<br>输出<br>输出对应字符串中元音字母的个数。<br>样例输入 Copy<br>abcio<br>efgaeio<br>ak akkkksd<br>样例输出 Copy<br>3<br>5<br>2<br>（一开始对题目的输入输出要求理解错误，认为是先输入一堆数据后统一输出，如果这道题像我这样<br>理解的话，则输入应该为一个二维数组，每一行是一个字符串，一行一行的进行计算）<br>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>int main()<br>{<br>    char ch;int sum;<br>    while(scanf(“%c” , &amp;ch) != EOF)/<em>一直输入直到题目所给文件的末尾，如果手动输入则用<br>    ctrl+z手动结束</em>/<br>    {<br>         if(ch==’a’||ch==’A’||ch==’e’||ch==’E’||ch==’i’||ch==’I’||ch==’o’||ch==’O’||ch==’U’||ch==’u’)<br>                sum++;<br>         if(ch == ‘\n’){printf(“%d\n” , sum);sum=0;}//sum记得在每一行的开始清零。<br>    }<br>    return 0;<br>}（在看聪哥敲代码的过程中发现他每次都会在一些符号前后加空格，值得学习）<br>                                第二块<br>scanf(%s):遇回车和空格结束。<br>gets()；遇空格才结束。<br>当输入为：a  b  c  d时<br>char c[100];<br>    while(scanf(“%s”,c)!=EOF){<br>        printf(“%s”,c);<br>    }输出为abcd。<br>    char c[100];<br>      while(gets(c)!=EOF){<br>          printf(“%s”,c);<br>      }输出为a  b  c  d。<br>                               第三块<br> 对于输入一个值然后将其转化为另一个值，且不是用一个特殊的递归表达式将它计算出来，此时可<br> 以定义一个常量数组，然后每个输入有在该常量数组里的对应的序号，然后用其序号输出。<br> 例题：<br> 把手放在键盘上时，稍不注意就会移动错一位，这样，Q会变成W，输入一个错位后敲出的字符串，<br> 输出打字员本来想打的字符串。输入保证合法，如输入中不会出现 A 。<br>   样例输入：<br>   O S, GOMR YPFSU/<br>   样例输出：<br>   I AM FINE TODAY.<br>#include&lt;stdio.h&gt;<br>char s[] ={  “`1234567890-=QWERTYUIOP[]\ASDFGHJKL;’ZXCVBNM,./“ }<br>int main(){<br>             int i ,c;<br>             while((c=getchar())!=EOF){<br>                   for (i=1; s[i]&amp;&amp; s[i]!=c;i++);//找错位之后的字符在常量表达表中的位置<br>                   if(s[i])putchar(s[i-1]);//如果找到，则输出它的前一个字符<br>                   else putchar(c);<br>             }<br>}</p>
+        <p>title: ‘[字符串相关题目]’<br>date: 2019-11-04 22:14:55<br>tags:<br>                               第一块<br>题目：题目描述<br>编写一程序，用于统计从键盘输入的字符串中的元音字母（a，A，e，E，i，I，o，O，u，U）的个数。<br>输入<br>每行输入一字符串，串长不超过255。<br>输出<br>输出对应字符串中元音字母的个数。<br>样例输入 Copy<br>abcio<br>efgaeio<br>ak akkkksd<br>样例输出 Copy<br>3<br>5<br>2<br>（一开始对题目的输入输出要求理解错误，认为是先输入一堆数据后统一输出，如果这道题像我这样<br>理解的话，则输入应该为一个二维数组，每一行是一个字符串，一行一行的进行计算）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char ch;int sum;</span><br><span class="line">    while(scanf(&quot;%c&quot; , &amp;ch) != EOF)/*一直输入直到题目所给文件的末尾，如果手动输入则用</span><br><span class="line">    ctrl+z手动结束*/</span><br><span class="line">    &#123;</span><br><span class="line">         if(ch==&apos;a&apos;||ch==&apos;A&apos;||ch==&apos;e&apos;||ch==&apos;E&apos;||ch==&apos;i&apos;||ch==&apos;I&apos;||ch==&apos;o&apos;||ch==&apos;O&apos;||ch==&apos;U&apos;||ch==&apos;u&apos;)</span><br><span class="line">                sum++;</span><br><span class="line">         if(ch == &apos;\n&apos;)&#123;printf(&quot;%d\n&quot; , sum);sum=0;&#125;//sum记得在每一行的开始清零。</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>第二块</code></pre><p>scanf(%s):遇回车和空格结束。<br>gets()；遇空格才结束。<br>当输入为：a  b  c  d时</p>
+<figure class="highlight plain"><figcaption><span>c[100];</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while(scanf(&quot;%s&quot;,c)!=EOF)&#123;</span><br><span class="line">    printf(&quot;%s&quot;,c);</span><br><span class="line">&#125;输出为abcd。</span><br><span class="line">char c[100];</span><br><span class="line">  while(gets(c)!=EOF)&#123;</span><br><span class="line">      printf(&quot;%s&quot;,c);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>  输出为a  b  c  d。<br>                               第三块<br> 对于输入一个值然后将其转化为另一个值，且不是用一个特殊的递归表达式将它计算出来，此时可<br> 以定义一个常量数组，然后每个输入有在该常量数组里的对应的序号，然后用其序号输出。<br> 例题：<br> 把手放在键盘上时，稍不注意就会移动错一位，这样，Q会变成W，输入一个错位后敲出的字符串，<br> 输出打字员本来想打的字符串。输入保证合法，如输入中不会出现 A 。<br>   样例输入：<br>   O S, GOMR YPFSU/<br>   样例输出：<br>   I AM FINE TODAY.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">char s[] =&#123;  &quot;`1234567890-=QWERTYUIOP[]\ASDFGHJKL;&apos;ZXCVBNM,./&quot; &#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">             int i ,c;</span><br><span class="line">             while((c=getchar())!=EOF)&#123;</span><br><span class="line">                   for (i=1; s[i]&amp;&amp; s[i]!=c;i++);//找错位之后的字符在常量表达表中的位置</span><br><span class="line">                   if(s[i])putchar(s[i-1]);//如果找到，则输出它的前一个字符</span><br><span class="line">                   else putchar(c);</span><br><span class="line">             &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" data-id="ck5g64rlz0003yotfbo1c3l4c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" data-id="ck5hy3h4x000548tfgcyq15lq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -102,7 +107,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          [对于多组输入且每个输入对应一个输出的结果]
+          对于多组输入且每个输入对应一个输出的结果
         
       </div>
     </a>
@@ -126,15 +131,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
     </div>
   </div>
 
@@ -145,6 +164,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">有关尺取法的深度思考</a>
+          </li>
         
           <li>
             <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/">倍增的思想</a>
@@ -160,10 +183,6 @@
         
           <li>
             <a href="/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/">有关字符串比较函数的拓展</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/">[对于多组输入且每个输入对应一个输出的结果]</a>
           </li>
         
       </ul>

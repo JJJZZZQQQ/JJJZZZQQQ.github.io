@@ -5,16 +5,13 @@
   
 
   
-  <title>“第一条” | jzq&#39;s blog</title>
+  <title>Archives: 2020/1 | jzq&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: “第一条”date: 2019-10-30 22:12:54tags:  这是我的第一条博客，在这里 先记录下由斌哥堂哥分享的有关整数求每个位上数的代码。 1234567891011121314151617181920#include &amp;lt;stdio.h&amp;gt;int main (void)&amp;#123;	long long int n;	int i = 0, a[1000], j">
-<meta property="og:type" content="article">
-<meta property="og:title" content="“第一条”">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;30&#x2F;%E2%80%9C%E7%AC%AC%E4%B8%80%E6%9D%A1%E2%80%9D&#x2F;index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="jzq&#39;s blog">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;archives&#x2F;2020&#x2F;01&#x2F;index.html">
 <meta property="og:site_name" content="jzq&#39;s blog">
-<meta property="og:description" content="title: “第一条”date: 2019-10-30 22:12:54tags:  这是我的第一条博客，在这里 先记录下由斌哥堂哥分享的有关整数求每个位上数的代码。 1234567891011121314151617181920#include &amp;lt;stdio.h&amp;gt;int main (void)&amp;#123;	long long int n;	int i = 0, a[1000], j">
 <meta property="og:locale" content="CN">
-<meta property="og:updated_time" content="2020-01-16T04:12:05.725Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="jzq&#39;s blog" type="application/atom+xml">
@@ -62,62 +59,40 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-“第一条”" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/30/%E2%80%9C%E7%AC%AC%E4%B8%80%E6%9D%A1%E2%80%9D/" class="article-date">
-  <time datetime="2019-10-30T14:12:54.430Z" itemprop="datePublished">2019-10-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      “第一条”
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2020" class="archive-year">2020</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/" class="archive-article-date">
+  <time datetime="2020-01-16T03:23:12.000Z" itemprop="datePublished">Jan 16</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">有关尺取法的深度思考</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: “第一条”<br>date: 2019-10-30 22:12:54<br>tags:</p>
-<p> 这是我的第一条博客，在这里 先记录下由斌哥堂哥分享的有关整数求每个位上数的代码。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main (void)</span><br><span class="line">&#123;</span><br><span class="line">	long long int n;</span><br><span class="line">	int i = 0, a[1000], j = 0, t = 0;</span><br><span class="line">	scanf (&quot;%I64d&quot;,&amp;n);</span><br><span class="line">	if(n==0)</span><br><span class="line">	  printf(&quot;0 &quot;);</span><br><span class="line">	while (n)</span><br><span class="line">	&#123;</span><br><span class="line">		a[j++] = n % 10;</span><br><span class="line">		n /= 10;</span><br><span class="line">	&#125;</span><br><span class="line">	for (i = j - 1; i &gt;= 0; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		printf (&quot;%d,&quot;,a[i]);/*将一个整数一个个的通过对10取余和除等于10，依次得到整数的</span><br><span class="line">                       最后一位数字，将其存入数组，当需要时通过数组的下标一个个取出*</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/30/%E2%80%9C%E7%AC%AC%E4%B8%80%E6%9D%A1%E2%80%9D/" data-id="ck5hy3h4a000048tfe50dajwm" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2019/10/31/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          水仙花数
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/10/30/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
+
 
 </section>
         

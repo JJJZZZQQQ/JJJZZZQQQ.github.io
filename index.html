@@ -61,6 +61,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-有关尺取法的深度思考" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/" class="article-date">
+  <time datetime="2020-01-16T03:23:12.000Z" itemprop="datePublished">2020-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">有关尺取法的深度思考</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>题目：<br>链接：<a href="https://ac.nowcoder.com/acm/contest/3570/B" target="_blank" rel="noopener">https://ac.nowcoder.com/acm/contest/3570/B</a><br>来源：牛客网</p>
+<p>“一刀建林流泪，两刀马云都得跪。”摆在你面前的一长条切糕，你想尝到切糕里面所有的果仁，什么核桃呀，杏仁呀，巴旦木呀…但因为切糕很贵，你要选取一段连续的切糕，使得你能吃到这份切糕里所有的果仁，切记切糕贵，所以要选取最短的长度并且要包含所有的果仁，这里的果仁可以简单的看做a果仁，b果仁，c果仁….，输出能包含所有果仁的最短长度。换句话说出现的果仁都要出现在你所选的区间里面，输出这个区间的最短长度。</p>
+<p>输入描述:<br>第一行包含整数n(1≤n≤100 000)——切糕的长度。<br>第二行包含长度为n的字符串，它由英文字母表中的大写字母和小写字母组成。<br>输出描述:<br>输出一个整数，表示最小选取的长度。</p>
+<p>本人之前对尺取法的理解很是浅显，只知道先扩大右端点，再改变左端点。但对于具体的思路很难想到。</p>
+<p>关键：将区间一直改变，让它一直满足题目所给的要求，但是让区间不在改变的条件很关键，本题的这个关键就是左端点的字母在左端点以后都没有出现过。（是左端点以后而不是选择的区间里面，因为会出现如abbcccccabc的情况）</p>
+<p>设满足题意即只要能让所有的字母出现至少一次的条件是a，该区间最短为b。<br>我们首先将区间左右端点都设为0，扩大右端点，当所有字母都出现后停止扩大，b即为该区间长度，此时右端点有可能在总区间的各个位置，然后我们扩大左端点，从现在的左端点位置进行判断，如果这个左端点在选择的区间中出现了不止一次，那么直接扩大左端点，无需其他任何操作。如果这个左端点只出现了一次，我们假设去掉它，再扩大右端点，如果在此时的右端点以后的各个字母已经没有该个被删去的字母，那么最优解已经找到；如果在此时的右端点以后的各个字母还有该个被删去的左端点，那么现在的区间即为【被删去的左端点+1，右端点后的下一个该字母】，这时，我们判断这个新区间与原来那个最短区间b的大小，选择最优解。此后将以上过程循环，直到删去左端点时右端点以后找不到该字母。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">include&lt;stdio.h&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,temp=0,i,ans;char s[100010];int a[200];</span><br><span class="line">    memset(a,0,sizeof(a));</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    scanf(&quot;%s&quot;,s);</span><br><span class="line">    for(i=0;i&lt;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">      a[s[i]]=1;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=65;i&lt;=122;i++)</span><br><span class="line">    if(a[i]) temp++;</span><br><span class="line">	memset(a,0,sizeof(a));</span><br><span class="line">    int l=0,r=0,now=1;ans=n+1;</span><br><span class="line">	a[s[l]]=1;</span><br><span class="line">	while(1)</span><br><span class="line">	 &#123;</span><br><span class="line">		 while(r&lt;n-1)</span><br><span class="line">		 &#123;</span><br><span class="line">		   if(now==temp) break;</span><br><span class="line">		   r++;</span><br><span class="line">		   if(!a[s[r]]) &#123;now++;&#125;</span><br><span class="line">		   a[s[r]]++;</span><br><span class="line"></span><br><span class="line">		 &#125;</span><br><span class="line">		 if(now&lt;temp) break;//左边的端点去后，在之后再也找不到了。</span><br><span class="line">		 if(r-l+1&lt;ans) ans=r-l+1;//ans等于选择的区间长度，最大为n</span><br><span class="line">		 if((--a[s[l]])==0) now--;//从左端点开始判断其是否在选择的区间中只出现了1次</span><br><span class="line">		 l++;</span><br><span class="line">	 &#125;</span><br><span class="line">    printf(&quot;%d\n&quot;,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/" data-id="ck5hy3h55000948tf0oe231f7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-倍增的思想" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/" class="article-date">
@@ -110,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/" data-id="ck5g64rlj0000yotffm6i1mw4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/" data-id="ck5hy3h4l000148tf78qo7541" class="article-share-link">Share</a>
       
       
     </footer>
@@ -142,34 +187,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: ‘[由于未初始化导致的本地运行和oj运行答案不一致]’<br>date: 2019-11-19 17:08:22<br>tags:</p>
+        <p>title: ‘[由于未初始化导致的本地运行和oj运行答案不一致]’<br>date: 2019-11-19 17:08:22<br>tags: 算法</p>
 <p>题目：本题要求实现一个函数，用下列公式求cos的近似值，精确到最后一项的绝对值小于e：<br>cos(x)=x0/0!−x2/2!+x4/4!−x6/6!+⋯<br>函数接口定义：<br>double funcos( double e, double x );<br>其中用户传入的参数为误差上限e和自变量x；函数funcos应返回用给定公式计算出来、并且满足误差要求的cos的近似值。输入输出均在双精度范围内。<br>错误代码：</p>
-<hr>
-<p>#include &lt;stdio.h&gt;<br>#include &lt;math.h&gt;</p>
-<p>double funcos( double e, double x )<br>{<br>    double s=0,t;<br>    int i=0,j,flag=1;<br>    while(fabs(t)&gt;=e)<br>    {<br>        t=pow(x,i);<br>        for(j=1;j&lt;=i;j++)<br>        {<br>            t/=j;<br>        }<br>        s+=t*flag;<br>        flag=-flag;<br>        i+=2;<br>    }<br>    return s;<br>}</p>
-<p>int main()<br>{<br>    double e, x;</p>
-<pre><code>scanf(&quot;%lf %lf&quot;, &amp;e, &amp;x);
-printf(&quot;cos(%.2f) = %.6f\n&quot;, x, funcos(e, x));
-
-return 0;</code></pre><p>}</p>
-<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">double funcos( double e, double x )</span><br><span class="line">&#123;</span><br><span class="line">    double s=0,t;</span><br><span class="line">    int i=0,j,flag=1;</span><br><span class="line">    while(fabs(t)&gt;=e)</span><br><span class="line">    &#123;</span><br><span class="line">        t=pow(x,i);</span><br><span class="line">        for(j=1;j&lt;=i;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            t/=j;</span><br><span class="line">        &#125;</span><br><span class="line">        s+=t*flag;</span><br><span class="line">        flag=-flag;</span><br><span class="line">        i+=2;</span><br><span class="line">    &#125;</span><br><span class="line">    return s;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    double e, x;</span><br><span class="line"></span><br><span class="line">    scanf(&quot;%lf %lf&quot;, &amp;e, &amp;x);</span><br><span class="line">    printf(&quot;cos(%.2f) = %.6f\n&quot;, x, funcos(e, x));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>正确代码：</p>
-<hr>
-<p>#include &lt;stdio.h&gt;<br>#include &lt;math.h&gt;</p>
-<p>double funcos( double e, double x )<br>{<br>    double s=0,t=0;<br>    int i=0,j,flag=1;<br>    while(fabs(t)&gt;=e)<br>    {<br>        t=pow(x,i);<br>        for(j=1;j&lt;=i;j++)<br>        {<br>            t/=j;<br>        }<br>        s+=t*flag;<br>        flag=-flag;<br>        i+=2;<br>    }<br>    return s;<br>}</p>
-<p>int main()<br>{<br>    double e, x;</p>
-<pre><code>scanf(&quot;%lf %lf&quot;, &amp;e, &amp;x);
-printf(&quot;cos(%.2f) = %.6f\n&quot;, x, funcos(e, x));
-
-return 0;</code></pre><p>}</p>
-<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">double funcos( double e, double x )</span><br><span class="line">&#123;</span><br><span class="line">    double s=0,t=0;</span><br><span class="line">    int i=0,j,flag=1;</span><br><span class="line">    while(fabs(t)&gt;=e)</span><br><span class="line">    &#123;</span><br><span class="line">        t=pow(x,i);</span><br><span class="line">        for(j=1;j&lt;=i;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            t/=j;</span><br><span class="line">        &#125;</span><br><span class="line">        s+=t*flag;</span><br><span class="line">        flag=-flag;</span><br><span class="line">        i+=2;</span><br><span class="line">    &#125;</span><br><span class="line">    return s;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    double e, x;</span><br><span class="line"></span><br><span class="line">    scanf(&quot;%lf %lf&quot;, &amp;e, &amp;x);</span><br><span class="line">    printf(&quot;cos(%.2f) = %.6f\n&quot;, x, funcos(e, x));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>分析：第一次错误代码再本地运行时能输出正确答案，当在oj上运行时却输出0.000000.<br>而第二次与第一次的区别仅仅是将t赋值为0，第一次未赋值，在本地能输出是因为巧合，刚好t的值<br>能进入循环，而在oj上却没有这种巧合，所以直接连循环都没有进入，直接输出s的初始值0.00000。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/" data-id="ck5g64rmb0007yotfd209ata1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/" data-id="ck5hy3h51000748tf53ix816h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -201,35 +229,13 @@ return 0;</code></pre><p>}</p>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: ‘[除数，判断俩个数字的各个数字是否有重复的]’<br>date: 2019-11-11 20:39:26<br>tags:</p>
-<p>#include &lt;stdio.h&gt;</p>
-<p>#include &lt;stdlib.h&gt;</p>
-<p>int is(int x,int y)</p>
-<p>{</p>
-<pre><code>int a[10];
-int i=0,s=0;
-for(i=0;i&lt;10;i++)a[i]=0;//给数组初始化数值，很重要，一开始没有对就是因为未初始化。
-for(i=0;i&lt;5;i++)
-{
-    a[x%10]=1;
-    a[y%10]=1;
-    x/=10;y/=10;
-}
-for(i=0;i&lt;10;i++)s+=a[i];
-if(s==10)return 1;
-return 0;</code></pre><p>}<br>int main()<br>{<br>    int n;</p>
-<pre><code>scanf(&quot;%d&quot;,&amp;n);
-for(int i=1234;i&lt;98765;i++){
-    if(is(i,i*n)==1)printf(&quot;%d/%d=%d\n&quot;,i*n,i,n);
-    if(i*n&gt;100000)break;
-}
-return 0;</code></pre><p>}</p>
+        <p>title: ‘[除数，判断俩个数字的各个数字是否有重复的]’<br>date: 2019-11-11 20:39:26<br>tags: 算法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int is(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    int a[10];</span><br><span class="line">    int i=0,s=0;</span><br><span class="line">    for(i=0;i&lt;10;i++)a[i]=0;//给数组初始化数值，很重要，一开始没有对就是因为未初始化。</span><br><span class="line">    for(i=0;i&lt;5;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[x%10]=1;</span><br><span class="line">        a[y%10]=1;</span><br><span class="line">        x/=10;y/=10;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=0;i&lt;10;i++)s+=a[i];</span><br><span class="line">    if(s==10)return 1;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line"></span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(int i=1234;i&lt;98765;i++)&#123;</span><br><span class="line">        if(is(i,i*n)==1)printf(&quot;%d/%d=%d\n&quot;,i*n,i,n);</span><br><span class="line">        if(i*n&gt;100000)break;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/11/%E9%99%A4%E6%95%B0%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BF%A9%E4%B8%AA%E6%95%B0%E5%AD%97%E7%9A%84%E5%90%84%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84/" data-id="ck5g64rmb0008yotfbsnh1dig" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/11/%E9%99%A4%E6%95%B0%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BF%A9%E4%B8%AA%E6%95%B0%E5%AD%97%E7%9A%84%E5%90%84%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84/" data-id="ck5hy3h53000848tf2a3fesbq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -261,27 +267,14 @@ return 0;</code></pre><p>}</p>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: ‘[有关字符串比较函数的拓展的思考]’<br>date: 2019-11-10 15:52:48<br>tags:<br>题目：如果一个字符串可以由某个长度为k的字符串重复多次得到，则称该串以k为周期。例如，abc<br>abc以3为周期（注意，它也以6为周期）。<br>    输入一个长度不超过80的字符串，输出其最小周期。</p>
-<pre><code class="&gt;">int bijiao(char s1[],int a,int b,char s2[],int c,int d)
-{
-      int i,j;
-      for(i=a,j=c;i&lt;=b,j&lt;=d;i++,j++)
-      {
-          if (s1[i]&lt;s2[j]||s1[i]&gt;s2[j])
-                return 0;
-      }
-      return 1;
-}
-//字符串比较函数，比较函数是否相同，此处不能直接用函数库里的比较字符串函数，因为这个
-需要在一个字符串中比较其子字符串。
-***
-作用：在一个字符串内部比较其不同的子字符串是否相同，而不是选取两个不同字符串进行比较。</code></pre>
+        <p>title: ‘[有关字符串比较函数的拓展的思考]’<br>date: 2019-11-10 15:52:48<br>tags: 算法<br>题目：如果一个字符串可以由某个长度为k的字符串重复多次得到，则称该串以k为周期。例如，abc<br>abc以3为周期（注意，它也以6为周期）。<br>    输入一个长度不超过80的字符串，输出其最小周期。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int bijiao(char s1[],int a,int b,char s2[],int c,int d)</span><br><span class="line">&#123;</span><br><span class="line">      int i,j;</span><br><span class="line">      for(i=a,j=c;i&lt;=b,j&lt;=d;i++,j++)</span><br><span class="line">      &#123;</span><br><span class="line">          if (s1[i]&lt;s2[j]||s1[i]&gt;s2[j])</span><br><span class="line">                return 0;</span><br><span class="line">      &#125;</span><br><span class="line">      return 1;</span><br><span class="line">&#125;</span><br><span class="line">字符串比较函数，比较函数是否相同，此处不能直接用函数库里的比较字符串函数，因为这个</span><br><span class="line">需要在一个字符串中比较其子字符串。</span><br></pre></td></tr></table></figure>
+<p>作用：在一个字符串内部比较其不同的子字符串是否相同，而不是选取两个不同字符串进行比较。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/" data-id="ck5g64rm30004yotf2ta1fjos" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/" data-id="ck5hy3h4v000448tfg6mtf6ct" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +287,7 @@ return 0;</code></pre><p>}</p>
     <article id="post-对于多组输入且每个输入对应一个输出的结果" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/" class="article-date">
-  <time datetime="2019-11-08T03:13:38.000Z" itemprop="datePublished">2019-11-08</time>
+  <time datetime="2019-11-08T03:13:38.092Z" itemprop="datePublished">2019-11-08</time>
 </a>
     
   </div>
@@ -305,7 +298,7 @@ return 0;</code></pre><p>}</p>
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/">[对于多组输入且每个输入对应一个输出的结果]</a>
+      <a class="article-title" href="/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/">对于多组输入且每个输入对应一个输出的结果</a>
     </h1>
   
 
@@ -313,16 +306,15 @@ return 0;</code></pre><p>}</p>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>题目：有多组输入(不超过1000组)，每组输入只有1行，包含两个整数l和r(1&lt;=l&lt;=r&lt;=100000)，<br>表示区间范围。对于一个数字n，如果它是偶数则n=n/2，否则n=n<em>3+1。对于一个区间[l,r]中的<br>数字不停的使用如上操作，直到其等于1为止，问所需操作次数最多的一个数需要多少次操作？”<br>输出：最多的次数为y。<br>每组输入对应输出一行“Case #x: y”，x表示第几组数数据（从1开始编号），y表示结果。<br>#include&lt;stdio.h&gt;//算数教室1<br>int main()<br>{<br>    int a,b,max=0,j=1;<br>    while(scanf(“%d%d”,&amp;a,&amp;b)!=EOF){<br>        for(int i=a;i&lt;=b;i++){<br>            int flag=0,temp=i;<br>            while(temp!=1){<br>                if(temp%2==0)temp/=2;//偶数<br>                else temp=temp</em>3+1;//奇数<br>                flag++;<br>            }<br>            if(flag&gt;max)max=flag;</p>
-<pre><code>    }
-    printf(&quot;Case #%d: %d\n&quot;,j++,max);
-}
-return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br>{<br>    int a,b,k=1,max;<br>    int tab[100001];<br>    for(int i=1;i&lt;=100000;i++){<br>            int flag=0,temp=i;<br>            while(temp!=1){<br>                if(temp%2==0)temp/=2;//偶数<br>                else temp=temp*3+1;//奇数<br>                flag++;<br>            }<br>            tab[i]=flag;<br>    }<br>    while(scanf(“%d%d”,&amp;a,&amp;b)!=EOF){<br>            max=0;<br>            for(int j=a;j&lt;=b;j++)<br>                if(tab[j]&gt;max)max=tab[j];<br>            printf(“Case #%d: %d\n”,k++,max);<br>    }<br>    return 0;<br>}<br>第一次的代码显示时间超限，改进后的第二个代码就没有这个问题了；<br>第二次改进的思路：首先将1到100000的每一个数字所对应的次数算出来，存入一个对应大小的数组<br>其中数字为数组的下标，数组存的值即为每个数字对应的运算次数，然后再根据题目的输入输出，查表<br>求出输入的每一个数字所对应的结果，再根据题目所给的要求将这些值进行运算求解。</p>
+        <p>title: ‘[对于多组输入且每个输入对应一个输出的结果]’<br>date: 2019-11-08 11:13:38<br>tags: 算法</p>
+<p>题目：有多组输入(不超过1000组)，每组输入只有1行，包含两个整数l和r(1&lt;=l&lt;=r&lt;=100000)，<br>表示区间范围。对于一个数字n，如果它是偶数则n=n/2，否则n=n*3+1。对于一个区间[l,r]中的<br>数字不停的使用如上操作，直到其等于1为止，问所需操作次数最多的一个数需要多少次操作？”<br>输出：最多的次数为y。<br>每组输入对应输出一行“Case #x: y”，x表示第几组数数据（从1开始编号），y表示结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;//算数教室1</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,max=0,j=1;</span><br><span class="line">    while(scanf(&quot;%d%d&quot;,&amp;a,&amp;b)!=EOF)&#123;</span><br><span class="line">        for(int i=a;i&lt;=b;i++)&#123;</span><br><span class="line">            int flag=0,temp=i;</span><br><span class="line">            while(temp!=1)&#123;</span><br><span class="line">                if(temp%2==0)temp/=2;//偶数</span><br><span class="line">                else temp=temp*3+1;//奇数</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            if(flag&gt;max)max=flag;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;Case #%d: %d\n&quot;,j++,max);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">#include&lt;stdio.h&gt;//算数教室2</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,k=1,max;</span><br><span class="line">    int tab[100001];</span><br><span class="line">    for(int i=1;i&lt;=100000;i++)&#123;</span><br><span class="line">            int flag=0,temp=i;</span><br><span class="line">            while(temp!=1)&#123;</span><br><span class="line">                if(temp%2==0)temp/=2;//偶数</span><br><span class="line">                else temp=temp*3+1;//奇数</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            tab[i]=flag;</span><br><span class="line">    &#125;</span><br><span class="line">    while(scanf(&quot;%d%d&quot;,&amp;a,&amp;b)!=EOF)&#123;</span><br><span class="line">            max=0;</span><br><span class="line">            for(int j=a;j&lt;=b;j++)</span><br><span class="line">                if(tab[j]&gt;max)max=tab[j];</span><br><span class="line">            printf(&quot;Case #%d: %d\n&quot;,k++,max);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一次的代码显示时间超限，改进后的第二个代码就没有这个问题了；<br>第二次改进的思路：首先将1到100000的每一个数字所对应的次数算出来，存入一个对应大小的数组<br>其中数字为数组的下标，数组存的值即为每个数字对应的运算次数，然后再根据题目的输入输出，查表<br>求出输入的每一个数字所对应的结果，再根据题目所给的要求将这些值进行运算求解。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/" data-id="ck5g64rm30005yotf5nlg65jj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/" data-id="ck5hy3h4s000348tfcq745kdd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +327,7 @@ return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br
     <article id="post-字符串相关题目" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" class="article-date">
-  <time datetime="2019-11-04T14:14:55.000Z" itemprop="datePublished">2019-11-04</time>
+  <time datetime="2019-11-04T14:14:55.520Z" itemprop="datePublished">2019-11-04</time>
 </a>
     
   </div>
@@ -346,7 +338,7 @@ return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/">[字符串相关题目]</a>
+      <a class="article-title" href="/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/">字符串相关题目</a>
     </h1>
   
 
@@ -354,12 +346,17 @@ return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>第一块</code></pre><p>题目：题目描述<br>编写一程序，用于统计从键盘输入的字符串中的元音字母（a，A，e，E，i，I，o，O，u，U）的个数。<br>输入<br>每行输入一字符串，串长不超过255。<br>输出<br>输出对应字符串中元音字母的个数。<br>样例输入 Copy<br>abcio<br>efgaeio<br>ak akkkksd<br>样例输出 Copy<br>3<br>5<br>2<br>（一开始对题目的输入输出要求理解错误，认为是先输入一堆数据后统一输出，如果这道题像我这样<br>理解的话，则输入应该为一个二维数组，每一行是一个字符串，一行一行的进行计算）<br>#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>int main()<br>{<br>    char ch;int sum;<br>    while(scanf(“%c” , &amp;ch) != EOF)/<em>一直输入直到题目所给文件的末尾，如果手动输入则用<br>    ctrl+z手动结束</em>/<br>    {<br>         if(ch==’a’||ch==’A’||ch==’e’||ch==’E’||ch==’i’||ch==’I’||ch==’o’||ch==’O’||ch==’U’||ch==’u’)<br>                sum++;<br>         if(ch == ‘\n’){printf(“%d\n” , sum);sum=0;}//sum记得在每一行的开始清零。<br>    }<br>    return 0;<br>}（在看聪哥敲代码的过程中发现他每次都会在一些符号前后加空格，值得学习）<br>                                第二块<br>scanf(%s):遇回车和空格结束。<br>gets()；遇空格才结束。<br>当输入为：a  b  c  d时<br>char c[100];<br>    while(scanf(“%s”,c)!=EOF){<br>        printf(“%s”,c);<br>    }输出为abcd。<br>    char c[100];<br>      while(gets(c)!=EOF){<br>          printf(“%s”,c);<br>      }输出为a  b  c  d。<br>                               第三块<br> 对于输入一个值然后将其转化为另一个值，且不是用一个特殊的递归表达式将它计算出来，此时可<br> 以定义一个常量数组，然后每个输入有在该常量数组里的对应的序号，然后用其序号输出。<br> 例题：<br> 把手放在键盘上时，稍不注意就会移动错一位，这样，Q会变成W，输入一个错位后敲出的字符串，<br> 输出打字员本来想打的字符串。输入保证合法，如输入中不会出现 A 。<br>   样例输入：<br>   O S, GOMR YPFSU/<br>   样例输出：<br>   I AM FINE TODAY.<br>#include&lt;stdio.h&gt;<br>char s[] ={  “`1234567890-=QWERTYUIOP[]\ASDFGHJKL;’ZXCVBNM,./“ }<br>int main(){<br>             int i ,c;<br>             while((c=getchar())!=EOF){<br>                   for (i=1; s[i]&amp;&amp; s[i]!=c;i++);//找错位之后的字符在常量表达表中的位置<br>                   if(s[i])putchar(s[i-1]);//如果找到，则输出它的前一个字符<br>                   else putchar(c);<br>             }<br>}</p>
+        <p>title: ‘[字符串相关题目]’<br>date: 2019-11-04 22:14:55<br>tags:<br>                               第一块<br>题目：题目描述<br>编写一程序，用于统计从键盘输入的字符串中的元音字母（a，A，e，E，i，I，o，O，u，U）的个数。<br>输入<br>每行输入一字符串，串长不超过255。<br>输出<br>输出对应字符串中元音字母的个数。<br>样例输入 Copy<br>abcio<br>efgaeio<br>ak akkkksd<br>样例输出 Copy<br>3<br>5<br>2<br>（一开始对题目的输入输出要求理解错误，认为是先输入一堆数据后统一输出，如果这道题像我这样<br>理解的话，则输入应该为一个二维数组，每一行是一个字符串，一行一行的进行计算）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char ch;int sum;</span><br><span class="line">    while(scanf(&quot;%c&quot; , &amp;ch) != EOF)/*一直输入直到题目所给文件的末尾，如果手动输入则用</span><br><span class="line">    ctrl+z手动结束*/</span><br><span class="line">    &#123;</span><br><span class="line">         if(ch==&apos;a&apos;||ch==&apos;A&apos;||ch==&apos;e&apos;||ch==&apos;E&apos;||ch==&apos;i&apos;||ch==&apos;I&apos;||ch==&apos;o&apos;||ch==&apos;O&apos;||ch==&apos;U&apos;||ch==&apos;u&apos;)</span><br><span class="line">                sum++;</span><br><span class="line">         if(ch == &apos;\n&apos;)&#123;printf(&quot;%d\n&quot; , sum);sum=0;&#125;//sum记得在每一行的开始清零。</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code>第二块</code></pre><p>scanf(%s):遇回车和空格结束。<br>gets()；遇空格才结束。<br>当输入为：a  b  c  d时</p>
+<figure class="highlight plain"><figcaption><span>c[100];</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while(scanf(&quot;%s&quot;,c)!=EOF)&#123;</span><br><span class="line">    printf(&quot;%s&quot;,c);</span><br><span class="line">&#125;输出为abcd。</span><br><span class="line">char c[100];</span><br><span class="line">  while(gets(c)!=EOF)&#123;</span><br><span class="line">      printf(&quot;%s&quot;,c);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>  输出为a  b  c  d。<br>                               第三块<br> 对于输入一个值然后将其转化为另一个值，且不是用一个特殊的递归表达式将它计算出来，此时可<br> 以定义一个常量数组，然后每个输入有在该常量数组里的对应的序号，然后用其序号输出。<br> 例题：<br> 把手放在键盘上时，稍不注意就会移动错一位，这样，Q会变成W，输入一个错位后敲出的字符串，<br> 输出打字员本来想打的字符串。输入保证合法，如输入中不会出现 A 。<br>   样例输入：<br>   O S, GOMR YPFSU/<br>   样例输出：<br>   I AM FINE TODAY.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">char s[] =&#123;  &quot;`1234567890-=QWERTYUIOP[]\ASDFGHJKL;&apos;ZXCVBNM,./&quot; &#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">             int i ,c;</span><br><span class="line">             while((c=getchar())!=EOF)&#123;</span><br><span class="line">                   for (i=1; s[i]&amp;&amp; s[i]!=c;i++);//找错位之后的字符在常量表达表中的位置</span><br><span class="line">                   if(s[i])putchar(s[i-1]);//如果找到，则输出它的前一个字符</span><br><span class="line">                   else putchar(c);</span><br><span class="line">             &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" data-id="ck5g64rlz0003yotfbo1c3l4c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" data-id="ck5hy3h4x000548tfgcyq15lq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,13 +388,13 @@ return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: “水仙花数一直没有正确输出的原因”<br>date: 2019-10-31 11:39:01<br>tags:#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>int main()<br>{<br>     int i,s,a,b;<br>     for(i=100;i&lt;1000;i++){<br>         b=i;<br>         s=0;//当循环嵌套的时候，在内层循环的开始都应该让判断条件初始化。<br>         while(b){<br>            a=b%10;<br>            //printf(“a=%d”,a);<br>            s=s+a<em>a</em>a;<br>            b=b/10;<br>            //printf(“b=%d”,b);<br>         }<br>         //printf(“s=%d\n”,s);<br>         if(s==i){<br>         printf(“%d\n”,i);<br>    }</p>
-<p>}<br>    return 0;<br>}</p>
+        <p>title: “水仙花数一直没有正确输出的原因”<br>date: 2019-10-31 11:39:01<br>tags:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">     int i,s,a,b;</span><br><span class="line">     for(i=100;i&lt;1000;i++)&#123;</span><br><span class="line">         b=i;</span><br><span class="line">         s=0;//当循环嵌套的时候，在内层循环的开始都应该让判断条件初始化。</span><br><span class="line">         while(b)&#123;</span><br><span class="line">            a=b%10;</span><br><span class="line">            //printf(&quot;a=%d&quot;,a);</span><br><span class="line">            s=s+a*a*a;</span><br><span class="line">            b=b/10;</span><br><span class="line">            //printf(&quot;b=%d&quot;,b);</span><br><span class="line">         &#125;</span><br><span class="line">         //printf(&quot;s=%d\n&quot;,s);</span><br><span class="line">         if(s==i)&#123;</span><br><span class="line">         printf(&quot;%d\n&quot;,i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/31/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" data-id="ck5g64rm70006yotf24kig8gl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/31/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" data-id="ck5hy3h4z000648tf577bhbos" class="article-share-link">Share</a>
       
       
     </footer>
@@ -429,13 +426,13 @@ return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br
     
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: “第一条”<br>date: 2019-10-30 22:12:54<br>tags:<br>#博客内容<br> 这是我的第一条博客，在这里 先记录下由斌哥堂哥分享的有关整数求每个位上数的代码。<br> #include &lt;stdio.h&gt;<br> int main (void)<br> {<br>     long long int n;<br>     int i = 0, a[1000], j = 0, t = 0;<br>     scanf (“%I64d”,&amp;n);<br>     if(n==0)<br>       printf(“0 “);<br>     while (n)<br>     {<br>         a[j++] = n % 10;<br>         n /= 10;<br>     }<br>     for (i = j - 1; i &gt;= 0; i–)<br>     {<br>         printf (“%d,”,a[i]);/<em>将一个整数一个个的通过对10取余和除等于10，依次得到整数的<br>                        最后一位数字，将其存入数组，当需要时通过数组的下标一个个取出</em><br>     }<br>     return 0;<br> }<br> 希望下一次写blog时已经可以将它部署到github上了。</p>
+        <p>title: “第一条”<br>date: 2019-10-30 22:12:54<br>tags:</p>
+<p> 这是我的第一条博客，在这里 先记录下由斌哥堂哥分享的有关整数求每个位上数的代码。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main (void)</span><br><span class="line">&#123;</span><br><span class="line">	long long int n;</span><br><span class="line">	int i = 0, a[1000], j = 0, t = 0;</span><br><span class="line">	scanf (&quot;%I64d&quot;,&amp;n);</span><br><span class="line">	if(n==0)</span><br><span class="line">	  printf(&quot;0 &quot;);</span><br><span class="line">	while (n)</span><br><span class="line">	&#123;</span><br><span class="line">		a[j++] = n % 10;</span><br><span class="line">		n /= 10;</span><br><span class="line">	&#125;</span><br><span class="line">	for (i = j - 1; i &gt;= 0; i--)</span><br><span class="line">	&#123;</span><br><span class="line">		printf (&quot;%d,&quot;,a[i]);/*将一个整数一个个的通过对10取余和除等于10，依次得到整数的</span><br><span class="line">                       最后一位数字，将其存入数组，当需要时通过数组的下标一个个取出*</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/30/%E2%80%9C%E7%AC%AC%E4%B8%80%E6%9D%A1%E2%80%9D/" data-id="ck5g64rlv0002yotf2py23kja" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/30/%E2%80%9C%E7%AC%AC%E4%B8%80%E6%9D%A1%E2%80%9D/" data-id="ck5hy3h4a000048tfe50dajwm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -484,7 +481,7 @@ return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/30/hello-world/" data-id="ck5g64rlr0001yotfc0ouhphj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/30/hello-world/" data-id="ck5hy3h4p000248tf49t90yp1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -504,15 +501,29 @@ return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
     </div>
   </div>
 
@@ -523,6 +534,10 @@ return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">有关尺取法的深度思考</a>
+          </li>
         
           <li>
             <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/">倍增的思想</a>
@@ -538,10 +553,6 @@ return 0;</code></pre><p>#include&lt;stdio.h&gt;//算数教室2<br>int main()<br
         
           <li>
             <a href="/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/">有关字符串比较函数的拓展</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/">[对于多组输入且每个输入对应一个输出的结果]</a>
           </li>
         
       </ul>

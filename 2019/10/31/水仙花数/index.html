@@ -7,14 +7,14 @@
   
   <title>水仙花数 | jzq&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: “水仙花数一直没有正确输出的原因”date: 2019-10-31 11:39:01tags:#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;int main(){     int i,s,a,b;     for(i=100;i&amp;lt;1000;i++){         b=i;         s=0;&#x2F;&#x2F;当循环嵌套的时候，在内">
+  <meta name="description" content="title: “水仙花数一直没有正确输出的原因”date: 2019-10-31 11:39:01tags: 1234567891011121314151617181920212223#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;int main()&amp;#123;     int i,s,a,b;     for(i=100;i&amp;lt;1000;i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="水仙花数">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;31&#x2F;%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0&#x2F;index.html">
 <meta property="og:site_name" content="jzq&#39;s blog">
-<meta property="og:description" content="title: “水仙花数一直没有正确输出的原因”date: 2019-10-31 11:39:01tags:#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;int main(){     int i,s,a,b;     for(i=100;i&amp;lt;1000;i++){         b=i;         s=0;&#x2F;&#x2F;当循环嵌套的时候，在内">
+<meta property="og:description" content="title: “水仙花数一直没有正确输出的原因”date: 2019-10-31 11:39:01tags: 1234567891011121314151617181920212223#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;int main()&amp;#123;     int i,s,a,b;     for(i=100;i&amp;lt;1000;i">
 <meta property="og:locale" content="CN">
-<meta property="og:updated_time" content="2019-10-31T04:19:59.337Z">
+<meta property="og:updated_time" content="2020-01-16T04:11:11.415Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="jzq&#39;s blog" type="application/atom+xml">
@@ -84,13 +84,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: “水仙花数一直没有正确输出的原因”<br>date: 2019-10-31 11:39:01<br>tags:#include &lt;stdio.h&gt;<br>#include &lt;stdlib.h&gt;<br>int main()<br>{<br>     int i,s,a,b;<br>     for(i=100;i&lt;1000;i++){<br>         b=i;<br>         s=0;//当循环嵌套的时候，在内层循环的开始都应该让判断条件初始化。<br>         while(b){<br>            a=b%10;<br>            //printf(“a=%d”,a);<br>            s=s+a<em>a</em>a;<br>            b=b/10;<br>            //printf(“b=%d”,b);<br>         }<br>         //printf(“s=%d\n”,s);<br>         if(s==i){<br>         printf(“%d\n”,i);<br>    }</p>
-<p>}<br>    return 0;<br>}</p>
+        <p>title: “水仙花数一直没有正确输出的原因”<br>date: 2019-10-31 11:39:01<br>tags:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">     int i,s,a,b;</span><br><span class="line">     for(i=100;i&lt;1000;i++)&#123;</span><br><span class="line">         b=i;</span><br><span class="line">         s=0;//当循环嵌套的时候，在内层循环的开始都应该让判断条件初始化。</span><br><span class="line">         while(b)&#123;</span><br><span class="line">            a=b%10;</span><br><span class="line">            //printf(&quot;a=%d&quot;,a);</span><br><span class="line">            s=s+a*a*a;</span><br><span class="line">            b=b/10;</span><br><span class="line">            //printf(&quot;b=%d&quot;,b);</span><br><span class="line">         &#125;</span><br><span class="line">         //printf(&quot;s=%d\n&quot;,s);</span><br><span class="line">         if(s==i)&#123;</span><br><span class="line">         printf(&quot;%d\n&quot;,i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/31/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" data-id="ck5g64rm70006yotf24kig8gl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/31/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" data-id="ck5hy3h4z000648tf577bhbos" class="article-share-link">Share</a>
       
       
     </footer>
@@ -103,7 +103,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          [字符串相关题目]
+          字符串相关题目
         
       </div>
     </a>
@@ -127,15 +127,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
     </div>
   </div>
 
@@ -146,6 +160,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">有关尺取法的深度思考</a>
+          </li>
         
           <li>
             <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/">倍增的思想</a>
@@ -161,10 +179,6 @@
         
           <li>
             <a href="/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/">有关字符串比较函数的拓展</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/">[对于多组输入且每个输入对应一个输出的结果]</a>
           </li>
         
       </ul>
