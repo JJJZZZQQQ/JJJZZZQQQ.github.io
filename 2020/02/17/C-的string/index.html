@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>C++的string | jzq&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="论string的重要性初次知道string时并没有将它放在心上，我觉得使用字符数组就够了，这让我在算法竞赛中吃了大亏。 使用string的优点1：快捷，所有的操作都无需再用复杂的cstring函数库，可直接使用&amp;gt;,&amp;lt;,==,=等符号 2：可直接利用sort使string数组按字典序从小到大排序，也可自定义规则 3：在某些题目上可与map相关联使用会有出其不意的效果。 4：不必担心内存是">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++的string">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;17&#x2F;C-%E7%9A%84string&#x2F;index.html">
+<meta property="og:site_name" content="jzq&#39;s blog">
+<meta property="og:description" content="论string的重要性初次知道string时并没有将它放在心上，我觉得使用字符数组就够了，这让我在算法竞赛中吃了大亏。 使用string的优点1：快捷，所有的操作都无需再用复杂的cstring函数库，可直接使用&amp;gt;,&amp;lt;,==,=等符号 2：可直接利用sort使string数组按字典序从小到大排序，也可自定义规则 3：在某些题目上可与map相关联使用会有出其不意的效果。 4：不必担心内存是">
+<meta property="og:locale" content="CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;img-blog.csdn.net&#x2F;20160825125138703">
+<meta property="og:updated_time" content="2020-02-17T14:26:02.679Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;img-blog.csdn.net&#x2F;20160825125138703">
+  
+    <link rel="alternate" href="/atom.xml" title="jzq&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">jzq&#39;s blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-C-的string" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/17/C-%E7%9A%84string/" class="article-date">
+  <time datetime="2020-02-17T02:56:23.000Z" itemprop="datePublished">2020-02-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++的string
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="论string的重要性"><a href="#论string的重要性" class="headerlink" title="论string的重要性"></a>论string的重要性</h1><p>初次知道string时并没有将它放在心上，我觉得使用字符数组就够了，这让我在算法竞赛中吃了大亏。</p>
+<h2 id="使用string的优点"><a href="#使用string的优点" class="headerlink" title="使用string的优点"></a>使用string的优点</h2><p>1：快捷，所有的操作都无需再用复杂的cstring函数库，可直接使用&gt;,&lt;,==,=等符号</p>
+<p>2：可直接利用sort使string数组按字典序从小到大排序，也可自定义规则</p>
+<p>3：在某些题目上可与map相关联使用会有出其不意的效果。</p>
+<p>4：不必担心内存是否足够</p>
+<p><img src="https://img-blog.csdn.net/20160825125138703" alt=""></p>
+<p>eg：<a href="https://atcoder.jp/contests/abc155/tasks/abc155_c" target="_blank" rel="noopener">https://atcoder.jp/contests/abc155/tasks/abc155_c</a></p>
+<p>Problem Statement</p>
+<p>We have N<br> voting papers. The<br>i<br>-th vote<br>(<br>1<br>≤<br>i<br>≤<br>N<br>)<br> has the string<br>S<br>i<br> written on it.</p>
+<p>Print all strings that are written on the most number of votes, in lexicographical order.</p>
+<p>Constraints<br>1<br>≤<br>N<br>≤<br>2<br>×<br>10<br>5<br>S<br>i</p>
+<p>(<br>1<br>≤<br>i<br>≤<br>N<br>)<br> are strings consisting of lowercase English letters.<br>The length of<br>S<br>i</p>
+<p>(<br>1<br>≤<br>i<br>≤<br>N<br>)<br> is between<br>1<br> and<br>10<br> (inclusive).</p>
+<p>Input<br>Input is given from Standard Input in the following format:</p>
+<p>N</p>
+<p>S<br>1</p>
+<p>:</p>
+<p>S<br>N</p>
+<p>Output</p>
+<p>Print all strings in question in lexicographical order.<br>附代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">#define INF 0x3f3f3f3f;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">string s[200005];</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(i=0; i&lt;n; i++)</span><br><span class="line">        cin&gt;&gt;s[i];</span><br><span class="line">    sort(s,s+n);</span><br><span class="line">    int m=1,cnt=1;</span><br><span class="line">    for(i=1; i&lt;n; i++) &#123;</span><br><span class="line">        if(s[i]==(s[i-1]))</span><br><span class="line">            cnt++;</span><br><span class="line">        else</span><br><span class="line">            cnt=1;</span><br><span class="line">        m=max(cnt,m);</span><br><span class="line">    &#125;</span><br><span class="line">    cnt=1;</span><br><span class="line">    if(m==1)</span><br><span class="line">        cout&lt;&lt;s[0]&lt;&lt;endl;</span><br><span class="line">    for(i=1; i&lt;n; i++) &#123;</span><br><span class="line">        if(s[i]==(s[i-1]))</span><br><span class="line">            cnt++;</span><br><span class="line">        else</span><br><span class="line">            cnt=1;</span><br><span class="line">        if(cnt==m)</span><br><span class="line">            cout&lt;&lt;s[i]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/17/C-%E7%9A%84string/" data-id="ck6qk040d0000nwtf7gjq4koo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          模拟法不模拟
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/03/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8FOr%E8%B4%AA%E5%BF%83/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基数排序Or贪心</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/">模拟法不模拟</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/17/C-%E7%9A%84string/">C++的string</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/03/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8FOr%E8%B4%AA%E5%BF%83/">基数排序Or贪心</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">有关尺取法的深度思考</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/">倍增的思想</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Jiang zq<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -3,6 +3,60 @@
   
     
     <entry>
+      <title><![CDATA[模拟法不模拟]]></title>
+      <url>/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/</url>
+      <content type="html"><![CDATA[<h1 id="拒绝傻瓜模拟"><a href="#拒绝傻瓜模拟" class="headerlink" title="拒绝傻瓜模拟"></a>拒绝傻瓜模拟</h1><p>发现自己对模拟这种最基础的解题方法使用的出了点问题，模拟的本意应是按题意直接编写程序，而我<br>却把模拟使用成了，从问题的起始，一直往后推到结束，这种思路在一些题上是正确的，<br>但是在一些题目上会发现中间的过程过于的复杂，用程序来模拟不现实，此时就应该考虑从大局上来思考<br>问题。</p>
+<p>eg：<a href="https://codeforces.com/contest/1304/problem/C" target="_blank" rel="noopener">https://codeforces.com/contest/1304/problem/C</a></p>
+<p>此题我能想到的解法便是从头开始推，每次都能满足条件且更接近下个顾客的舒适温度，类似与贪心的<br>思想，但仔细想来根本实现不了，中间可执行的操作太多了，每一分钟可有3种操作。这时候，我们不妨<br>从大体上来看，我们将一段时间温度可以调控到的温度设为一个区间，当顾客的舒适温度区间与能调控<br>的区间有相交的话，便能满足条件。</p>
+<p>附代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">const int maxn=1e5+50;</span><br><span class="line">struct customers&#123;   </span><br><span class="line">   ll t,l,r;</span><br><span class="line">  &#125;s[150];</span><br><span class="line">int main()</span><br><span class="line">&#123;    ll t;    scanf(&quot;%lld&quot;,&amp;t);</span><br><span class="line">     while(t--)</span><br><span class="line">     &#123;     </span><br><span class="line">        ll n,m,ans=0,left,right,flag=0;</span><br><span class="line">        scanf(&quot;%lld%lld&quot;,&amp;n,&amp;m);</span><br><span class="line">        for(int i=0;i&lt;n;i++)    </span><br><span class="line">          scanf(&quot;%lld%lld%lld&quot;,&amp;s[i].t,&amp;s[i].l,&amp;s[i].r);         </span><br><span class="line">          left=right=m;     </span><br><span class="line">          for(int i=0;i&lt;n;i++)</span><br><span class="line">         &#123;        </span><br><span class="line">            ll x=s[i].t-ans;  </span><br><span class="line">            left-=x;     </span><br><span class="line">            right+=x;</span><br><span class="line">            if(right&lt;s[i].l||left&gt;s[i].r)</span><br><span class="line">            &#123;               </span><br><span class="line">               flag=1;   </span><br><span class="line">                break;    </span><br><span class="line">            &#125;   </span><br><span class="line">            if(left&lt;s[i].l)</span><br><span class="line">            left=s[i].l;         </span><br><span class="line">            if(right&gt;s[i].r) right=s[i].r;  </span><br><span class="line">              ans=s[i].t;   </span><br><span class="line">            &#125;   </span><br><span class="line">            if(flag)         puts(&quot;NO&quot;);</span><br><span class="line">            else puts(&quot;Yes&quot;);   </span><br><span class="line">     &#125;   </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[C++的string]]></title>
+      <url>/2020/02/17/C-%E7%9A%84string/</url>
+      <content type="html"><![CDATA[<h1 id="论string的重要性"><a href="#论string的重要性" class="headerlink" title="论string的重要性"></a>论string的重要性</h1><p>初次知道string时并没有将它放在心上，我觉得使用字符数组就够了，这让我在算法竞赛中吃了大亏。</p>
+<h2 id="使用string的优点"><a href="#使用string的优点" class="headerlink" title="使用string的优点"></a>使用string的优点</h2><p>1：快捷，所有的操作都无需再用复杂的cstring函数库，可直接使用&gt;,&lt;,==,=等符号</p>
+<p>2：可直接利用sort使string数组按字典序从小到大排序，也可自定义规则</p>
+<p>3：在某些题目上可与map相关联使用会有出其不意的效果。</p>
+<p>4：不必担心内存是否足够</p>
+<p><img src="https://img-blog.csdn.net/20160825125138703" alt=""></p>
+<p>eg：<a href="https://atcoder.jp/contests/abc155/tasks/abc155_c" target="_blank" rel="noopener">https://atcoder.jp/contests/abc155/tasks/abc155_c</a></p>
+<p>Problem Statement</p>
+<p>We have N<br> voting papers. The<br>i<br>-th vote<br>(<br>1<br>≤<br>i<br>≤<br>N<br>)<br> has the string<br>S<br>i<br> written on it.</p>
+<p>Print all strings that are written on the most number of votes, in lexicographical order.</p>
+<p>Constraints<br>1<br>≤<br>N<br>≤<br>2<br>×<br>10<br>5<br>S<br>i</p>
+<p>(<br>1<br>≤<br>i<br>≤<br>N<br>)<br> are strings consisting of lowercase English letters.<br>The length of<br>S<br>i</p>
+<p>(<br>1<br>≤<br>i<br>≤<br>N<br>)<br> is between<br>1<br> and<br>10<br> (inclusive).</p>
+<p>Input<br>Input is given from Standard Input in the following format:</p>
+<p>N</p>
+<p>S<br>1</p>
+<p>:</p>
+<p>S<br>N</p>
+<p>Output</p>
+<p>Print all strings in question in lexicographical order.<br>附代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">#define INF 0x3f3f3f3f;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">string s[200005];</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(i=0; i&lt;n; i++)</span><br><span class="line">        cin&gt;&gt;s[i];</span><br><span class="line">    sort(s,s+n);</span><br><span class="line">    int m=1,cnt=1;</span><br><span class="line">    for(i=1; i&lt;n; i++) &#123;</span><br><span class="line">        if(s[i]==(s[i-1]))</span><br><span class="line">            cnt++;</span><br><span class="line">        else</span><br><span class="line">            cnt=1;</span><br><span class="line">        m=max(cnt,m);</span><br><span class="line">    &#125;</span><br><span class="line">    cnt=1;</span><br><span class="line">    if(m==1)</span><br><span class="line">        cout&lt;&lt;s[0]&lt;&lt;endl;</span><br><span class="line">    for(i=1; i&lt;n; i++) &#123;</span><br><span class="line">        if(s[i]==(s[i-1]))</span><br><span class="line">            cnt++;</span><br><span class="line">        else</span><br><span class="line">            cnt=1;</span><br><span class="line">        if(cnt==m)</span><br><span class="line">            cout&lt;&lt;s[i]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[基数排序Or贪心]]></title>
       <url>/2020/02/03/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8FOr%E8%B4%AA%E5%BF%83/</url>
       <content type="html"><![CDATA[<h1 id="基数排序中的贪心思想"><a href="#基数排序中的贪心思想" class="headerlink" title="基数排序中的贪心思想"></a>基数排序中的贪心思想</h1><p>什么是基数排序？先来看看它的实现：从个位到最高位依次排序一次，到最后的时候该数组有序。<br>我们可以这么理解，一个数 = 个位+十位<em>10+百位</em>100+千位*1000…当比较大小时如果我们这样去想，<br>我们先保证个位的有序度，再保证十位的有序度，再保证百位的有序度…依次往后延伸，这样在最后<br>整个数组都会是有序的。贪心算法是局部最优带来整体最优，基数排序这里也一样，从局部的个位有序，<br>十位有序，百位有序，一直到整体有序。<br> 附上C语言代码：</p>
