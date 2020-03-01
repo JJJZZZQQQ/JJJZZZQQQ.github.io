@@ -5,16 +5,17 @@
   
 
   
-  <title>水仙花数 | jzq&#39;s blog</title>
+  <title>三色球问题  | jzq&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: “水仙花数一直没有正确输出的原因”date: 2019-10-31 11:39:01tags: 1234567891011121314151617181920212223#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;int main()&amp;#123;     int i,s,a,b;     for(i=100;i&amp;lt;1000;i">
+  <meta name="description" content="题目：若一个口袋中放有a个红的,b个白的和c个黒的，问从中任取n个共有多少种不同的颜色搭配？输入：多组数据，每组一行，a,b,c,n,都不大于100 输出：每个答案一行思路：此题由于数据规模较小，于是考虑暴力枚举，初次枚举采用的是三层循环，后发现时间会超出限制经过思考，通过红色球数,白色球数,红色球数,n四个数之间的关系，可缩减一次循环。 code： 12345678910111213141516">
+<meta name="keywords" content="算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="水仙花数">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;31&#x2F;%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0&#x2F;index.html">
+<meta property="og:title" content="三色球问题 ">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;02&#x2F;26&#x2F;%E4%B8%89%E8%89%B2%E7%90%83%E9%97%AE%E9%A2%98&#x2F;index.html">
 <meta property="og:site_name" content="jzq&#39;s blog">
-<meta property="og:description" content="title: “水仙花数一直没有正确输出的原因”date: 2019-10-31 11:39:01tags: 1234567891011121314151617181920212223#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;stdlib.h&amp;gt;int main()&amp;#123;     int i,s,a,b;     for(i=100;i&amp;lt;1000;i">
+<meta property="og:description" content="题目：若一个口袋中放有a个红的,b个白的和c个黒的，问从中任取n个共有多少种不同的颜色搭配？输入：多组数据，每组一行，a,b,c,n,都不大于100 输出：每个答案一行思路：此题由于数据规模较小，于是考虑暴力枚举，初次枚举采用的是三层循环，后发现时间会超出限制经过思考，通过红色球数,白色球数,红色球数,n四个数之间的关系，可缩减一次循环。 code： 12345678910111213141516">
 <meta property="og:locale" content="CN">
-<meta property="og:updated_time" content="2020-01-16T04:11:11.415Z">
+<meta property="og:updated_time" content="2020-03-01T07:31:17.241Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="jzq&#39;s blog" type="application/atom+xml">
@@ -62,10 +63,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-水仙花数" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-三色球问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/10/31/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" class="article-date">
-  <time datetime="2019-10-31T03:39:01.869Z" itemprop="datePublished">2019-10-31</time>
+    <a href="/2020/02/26/%E4%B8%89%E8%89%B2%E7%90%83%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2020-02-26T14:35:59.000Z" itemprop="datePublished">2020-02-26</time>
 </a>
     
   </div>
@@ -76,7 +77,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      水仙花数
+      三色球问题 
     </h1>
   
 
@@ -84,34 +85,38 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>title: “水仙花数一直没有正确输出的原因”<br>date: 2019-10-31 11:39:01<br>tags:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">     int i,s,a,b;</span><br><span class="line">     for(i=100;i&lt;1000;i++)&#123;</span><br><span class="line">         b=i;</span><br><span class="line">         s=0;//当循环嵌套的时候，在内层循环的开始都应该让判断条件初始化。</span><br><span class="line">         while(b)&#123;</span><br><span class="line">            a=b%10;</span><br><span class="line">            //printf(&quot;a=%d&quot;,a);</span><br><span class="line">            s=s+a*a*a;</span><br><span class="line">            b=b/10;</span><br><span class="line">            //printf(&quot;b=%d&quot;,b);</span><br><span class="line">         &#125;</span><br><span class="line">         //printf(&quot;s=%d\n&quot;,s);</span><br><span class="line">         if(s==i)&#123;</span><br><span class="line">         printf(&quot;%d\n&quot;,i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>题目：若一个口袋中放有a个红的,b个白的和c个黒的，问从中任取n个共有多少种不同的颜色搭配？<br>输入：<br>多组数据，每组一行，a,b,c,n,都不大于100</p>
+<p>输出：<br>每个答案一行<br>思路：此题由于数据规模较小，于是考虑暴力枚举，初次枚举采用的是三层循环，后发现时间会超出限制<br>经过思考，通过红色球数,白色球数,红色球数,n四个数之间的关系，可缩减一次循环。</p>
+<p>code：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,c,n;</span><br><span class="line">    while(scanf(&quot;%d %d %d %d&quot;,&amp;a,&amp;b,&amp;c,&amp;n)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        int i,j,sum = 0;</span><br><span class="line">        for(i=0;i&lt;=a;i++)</span><br><span class="line">            for(j=0;j&lt;=b;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if(n - i - j &lt; = c &amp;&amp; (n - i - j &gt; = 0))sum++;</span><br><span class="line">            &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;,sum);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/31/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" data-id="ck78qkmnc000m1ktfhwb0g268" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/26/%E4%B8%89%E8%89%B2%E7%90%83%E9%97%AE%E9%A2%98/" data-id="ck78qkmlq00011ktfghlr5cc9" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/02/26/%E5%A4%A7%E6%95%B0%E5%8A%A0%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          字符串相关题目
+          大数加法
         
       </div>
     </a>
   
   
-    <a href="/2019/10/30/%E2%80%9C%E7%AC%AC%E4%B8%80%E6%9D%A1%E2%80%9D/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">“第一条”</div>
+      <div class="article-nav-title">模拟法不模拟</div>
     </a>
   
 </nav>

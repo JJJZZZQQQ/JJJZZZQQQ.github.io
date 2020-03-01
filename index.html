@@ -61,6 +61,138 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-排列与组合" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/26/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88/" class="article-date">
+  <time datetime="2020-02-26T14:37:53.000Z" itemprop="datePublished">2020-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/26/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88/">排列与组合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>排列与组合是许多模拟题的中心思想，此文就讲解一下两者的实现。</p>
+<h3 id="排列"><a href="#排列" class="headerlink" title="排列"></a>排列</h3><p>设有a,b,c三个数，将其排列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">arr[0]=a;arr[1]=b;arr[2]=c;</span><br><span class="line">for(int i=0;i&lt;3;i++)</span><br><span class="line">   for(int j=0;j&lt;3;j++)</span><br><span class="line">   &#123;</span><br><span class="line">     if(arr[i]!=arr[j])</span><br><span class="line">         for(k=0;k&lt;3;k++)</span><br><span class="line">         &#123;</span><br><span class="line">             if(arr[i]!=arr[k]&amp;&amp;arr[j]!=arr[k])</span><br><span class="line">             sum++;    </span><br><span class="line">         &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h3><p>设有a,b,c三个数，将其组合。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">arr[0]=a;arr[1]=b;arr[2]=c;</span><br><span class="line">for(int i=0;i&lt;3;i++)</span><br><span class="line">  for(int j=j;j&lt;3;j++)</span><br><span class="line">       for(k=j;k&lt;3;k++)</span><br><span class="line">       &#123;</span><br><span class="line">           if(arr[i]!=arr[k]&amp;&amp;arr[j]!=arr[k])</span><br><span class="line">           sum++;    </span><br><span class="line">       &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>其中，组合与排列还可以是从N个数中选择M个进行排列与组合，则每次循环中循环变量（如i，j，k）的范围是0到N，而循环的层数由M控制，M等于几就有几层循环。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/26/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88/" data-id="ck78qkmml00091ktfhm15dxgb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-大数加法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/26/%E5%A4%A7%E6%95%B0%E5%8A%A0%E6%B3%95/" class="article-date">
+  <time datetime="2020-02-26T14:37:12.000Z" itemprop="datePublished">2020-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/26/%E5%A4%A7%E6%95%B0%E5%8A%A0%E6%B3%95/">大数加法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>题目描述：求两个不超过200位的非负整数的和。</p>
+<p>输入：有两行，每行是一个不超过200位的非负整数，没有多余的前导0。</p>
+<p>输出：一行，即相加后的结果。结果里不能有多余的前导0，即如果结果是342，那么就不能输出为0342。</p>
+<p>本题思路很简单，用数组模拟加法运算的过程，其中有几点可以有效的使代码更为清晰：</p>
+<p>1：将数字按位存入数组时，要倒着存入，如一个数为1234567，则存入数组时应为7,6,5,4,3,2,1。这样是为了方便两个数相加的时候每一位对准每一位，就算位数不同也无需额外考虑。</p>
+<p>2:当加法循环退出的时候，千万要确保此时的进位已经算进去了，所以我们将进位的值放到下一位里。</p>
+<p>3：去除前导0时只需从目前所在的这个位置（即进位所在的位置开始），每遇到一个0就往下一位，直到首位不为0为止。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">int a[201]=&#123;0&#125;;</span><br><span class="line">int b[201]=&#123;0&#125;;</span><br><span class="line">int c[202]=&#123;0&#125;;</span><br><span class="line">char s1[201];</span><br><span class="line">char s2[201];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    gets(s1);</span><br><span class="line">    gets(s2);</span><br><span class="line">    int i,jinwei=0;</span><br><span class="line">    int len1=strlen(s1);</span><br><span class="line">    int len2=strlen(s2);</span><br><span class="line">    for(i=1;i&lt;=len1;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i]=s1[len1-i]-48;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=1;i&lt;=len2;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        b[i]=s2[len2-i]-48;</span><br><span class="line">    &#125;</span><br><span class="line">    int max;</span><br><span class="line">    if(len1&gt;len2)max=len1;</span><br><span class="line">    else max=len2;</span><br><span class="line">    for(i=1;i&lt;=max;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c[i]=a[i]+b[i]+jinwei;</span><br><span class="line">        jinwei=c[i]/10;</span><br><span class="line">        c[i]%=10;</span><br><span class="line">    &#125;</span><br><span class="line">    c[i]=jinwei;</span><br><span class="line">    if(c[i]==0)i--;</span><br><span class="line">    for(;i&gt;=1;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%d&quot;,c[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/26/%E5%A4%A7%E6%95%B0%E5%8A%A0%E6%B3%95/" data-id="ck78qkmmi00081ktfgo08aho5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" rel="tag">高精度</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-三色球问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/26/%E4%B8%89%E8%89%B2%E7%90%83%E9%97%AE%E9%A2%98/" class="article-date">
+  <time datetime="2020-02-26T14:35:59.000Z" itemprop="datePublished">2020-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/26/%E4%B8%89%E8%89%B2%E7%90%83%E9%97%AE%E9%A2%98/">三色球问题 </a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>题目：若一个口袋中放有a个红的,b个白的和c个黒的，问从中任取n个共有多少种不同的颜色搭配？<br>输入：<br>多组数据，每组一行，a,b,c,n,都不大于100</p>
+<p>输出：<br>每个答案一行<br>思路：此题由于数据规模较小，于是考虑暴力枚举，初次枚举采用的是三层循环，后发现时间会超出限制<br>经过思考，通过红色球数,白色球数,红色球数,n四个数之间的关系，可缩减一次循环。</p>
+<p>code：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,c,n;</span><br><span class="line">    while(scanf(&quot;%d %d %d %d&quot;,&amp;a,&amp;b,&amp;c,&amp;n)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        int i,j,sum = 0;</span><br><span class="line">        for(i=0;i&lt;=a;i++)</span><br><span class="line">            for(j=0;j&lt;=b;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if(n - i - j &lt; = c &amp;&amp; (n - i - j &gt; = 0))sum++;</span><br><span class="line">            &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;,sum);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/26/%E4%B8%89%E8%89%B2%E7%90%83%E9%97%AE%E9%A2%98/" data-id="ck78qkmlq00011ktfghlr5cc9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-模拟法不模拟" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/" class="article-date">
@@ -92,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/" data-id="ck6qk041b000anwtfhab3723y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/" data-id="ck78qkmn0000h1ktf3irz3oyk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
@@ -151,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/17/C-%E7%9A%84string/" data-id="ck6qk040d0000nwtf7gjq4koo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/17/C-%E7%9A%84string/" data-id="ck78qkml100001ktff76shz06" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li></ul>
@@ -191,7 +323,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/03/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8FOr%E8%B4%AA%E5%BF%83/" data-id="ck6qk04130005nwtff4h586xb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/03/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8FOr%E8%B4%AA%E5%BF%83/" data-id="ck78qkmmx000f1ktf43cx98lr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
@@ -236,7 +368,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/" data-id="ck6qk041f000dnwtf7no1gfyr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/" data-id="ck78qkmn9000l1ktffqsuh9dh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
@@ -297,7 +429,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/" data-id="ck6qk04190009nwtf95fv50ek" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/" data-id="ck78qkmmb00041ktffegsel3j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -339,7 +471,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/" data-id="ck6qk041h000fnwtfbzpw8nie" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/" data-id="ck78qkmne000o1ktfdy5s7vac" class="article-share-link">Share</a>
       
       
     </footer>
@@ -377,128 +509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/11/%E9%99%A4%E6%95%B0%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BF%A9%E4%B8%AA%E6%95%B0%E5%AD%97%E7%9A%84%E5%90%84%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84/" data-id="ck6qk041m000hnwtf82pseuxo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-有关字符串比较函数的拓展" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/" class="article-date">
-  <time datetime="2019-11-10T07:52:48.290Z" itemprop="datePublished">2019-11-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/">有关字符串比较函数的拓展</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: ‘[有关字符串比较函数的拓展的思考]’<br>date: 2019-11-10 15:52:48<br>tags: 算法<br>题目：如果一个字符串可以由某个长度为k的字符串重复多次得到，则称该串以k为周期。例如，abc<br>abc以3为周期（注意，它也以6为周期）。<br>    输入一个长度不超过80的字符串，输出其最小周期。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int bijiao(char s1[],int a,int b,char s2[],int c,int d)</span><br><span class="line">&#123;</span><br><span class="line">      int i,j;</span><br><span class="line">      for(i=a,j=c;i&lt;=b,j&lt;=d;i++,j++)</span><br><span class="line">      &#123;</span><br><span class="line">          if (s1[i]&lt;s2[j]||s1[i]&gt;s2[j])</span><br><span class="line">                return 0;</span><br><span class="line">      &#125;</span><br><span class="line">      return 1;</span><br><span class="line">&#125;</span><br><span class="line">字符串比较函数，比较函数是否相同，此处不能直接用函数库里的比较字符串函数，因为这个</span><br><span class="line">需要在一个字符串中比较其子字符串。</span><br></pre></td></tr></table></figure>
-<p>作用：在一个字符串内部比较其不同的子字符串是否相同，而不是选取两个不同字符串进行比较。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/" data-id="ck6qk041d000bnwtf5e885vmn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-对于多组输入且每个输入对应一个输出的结果" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/" class="article-date">
-  <time datetime="2019-11-08T03:13:38.092Z" itemprop="datePublished">2019-11-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/">对于多组输入且每个输入对应一个输出的结果</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: ‘[对于多组输入且每个输入对应一个输出的结果]’<br>date: 2019-11-08 11:13:38<br>tags: 算法</p>
-<p>题目：有多组输入(不超过1000组)，每组输入只有1行，包含两个整数l和r(1&lt;=l&lt;=r&lt;=100000)，<br>表示区间范围。对于一个数字n，如果它是偶数则n=n/2，否则n=n*3+1。对于一个区间[l,r]中的<br>数字不停的使用如上操作，直到其等于1为止，问所需操作次数最多的一个数需要多少次操作？”<br>输出：最多的次数为y。<br>每组输入对应输出一行“Case #x: y”，x表示第几组数数据（从1开始编号），y表示结果。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;//算数教室1</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,max=0,j=1;</span><br><span class="line">    while(scanf(&quot;%d%d&quot;,&amp;a,&amp;b)!=EOF)&#123;</span><br><span class="line">        for(int i=a;i&lt;=b;i++)&#123;</span><br><span class="line">            int flag=0,temp=i;</span><br><span class="line">            while(temp!=1)&#123;</span><br><span class="line">                if(temp%2==0)temp/=2;//偶数</span><br><span class="line">                else temp=temp*3+1;//奇数</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            if(flag&gt;max)max=flag;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;Case #%d: %d\n&quot;,j++,max);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">#include&lt;stdio.h&gt;//算数教室2</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,k=1,max;</span><br><span class="line">    int tab[100001];</span><br><span class="line">    for(int i=1;i&lt;=100000;i++)&#123;</span><br><span class="line">            int flag=0,temp=i;</span><br><span class="line">            while(temp!=1)&#123;</span><br><span class="line">                if(temp%2==0)temp/=2;//偶数</span><br><span class="line">                else temp=temp*3+1;//奇数</span><br><span class="line">                flag++;</span><br><span class="line">            &#125;</span><br><span class="line">            tab[i]=flag;</span><br><span class="line">    &#125;</span><br><span class="line">    while(scanf(&quot;%d%d&quot;,&amp;a,&amp;b)!=EOF)&#123;</span><br><span class="line">            max=0;</span><br><span class="line">            for(int j=a;j&lt;=b;j++)</span><br><span class="line">                if(tab[j]&gt;max)max=tab[j];</span><br><span class="line">            printf(&quot;Case #%d: %d\n&quot;,k++,max);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>第一次的代码显示时间超限，改进后的第二个代码就没有这个问题了；<br>第二次改进的思路：首先将1到100000的每一个数字所对应的次数算出来，存入一个对应大小的数组<br>其中数字为数组的下标，数组存的值即为每个数字对应的运算次数，然后再根据题目的输入输出，查表<br>求出输入的每一个数字所对应的结果，再根据题目所给的要求将这些值进行运算求解。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/" data-id="ck6qk04160007nwtf1ufxd394" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-字符串相关题目" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" class="article-date">
-  <time datetime="2019-11-04T14:14:55.520Z" itemprop="datePublished">2019-11-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/">字符串相关题目</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>title: ‘[字符串相关题目]’<br>date: 2019-11-04 22:14:55<br>tags:<br>                               第一块<br>题目：题目描述<br>编写一程序，用于统计从键盘输入的字符串中的元音字母（a，A，e，E，i，I，o，O，u，U）的个数。<br>输入<br>每行输入一字符串，串长不超过255。<br>输出<br>输出对应字符串中元音字母的个数。<br>样例输入 Copy<br>abcio<br>efgaeio<br>ak akkkksd<br>样例输出 Copy<br>3<br>5<br>2<br>（一开始对题目的输入输出要求理解错误，认为是先输入一堆数据后统一输出，如果这道题像我这样<br>理解的话，则输入应该为一个二维数组，每一行是一个字符串，一行一行的进行计算）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    char ch;int sum;</span><br><span class="line">    while(scanf(&quot;%c&quot; , &amp;ch) != EOF)/*一直输入直到题目所给文件的末尾，如果手动输入则用</span><br><span class="line">    ctrl+z手动结束*/</span><br><span class="line">    &#123;</span><br><span class="line">         if(ch==&apos;a&apos;||ch==&apos;A&apos;||ch==&apos;e&apos;||ch==&apos;E&apos;||ch==&apos;i&apos;||ch==&apos;I&apos;||ch==&apos;o&apos;||ch==&apos;O&apos;||ch==&apos;U&apos;||ch==&apos;u&apos;)</span><br><span class="line">                sum++;</span><br><span class="line">         if(ch == &apos;\n&apos;)&#123;printf(&quot;%d\n&quot; , sum);sum=0;&#125;//sum记得在每一行的开始清零。</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<pre><code>第二块</code></pre><p>scanf(%s):遇回车和空格结束。<br>gets()；遇空格才结束。<br>当输入为：a  b  c  d时</p>
-<figure class="highlight plain"><figcaption><span>c[100];</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">while(scanf(&quot;%s&quot;,c)!=EOF)&#123;</span><br><span class="line">    printf(&quot;%s&quot;,c);</span><br><span class="line">&#125;输出为abcd。</span><br><span class="line">char c[100];</span><br><span class="line">  while(gets(c)!=EOF)&#123;</span><br><span class="line">      printf(&quot;%s&quot;,c);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>  输出为a  b  c  d。<br>                               第三块<br> 对于输入一个值然后将其转化为另一个值，且不是用一个特殊的递归表达式将它计算出来，此时可<br> 以定义一个常量数组，然后每个输入有在该常量数组里的对应的序号，然后用其序号输出。<br> 例题：<br> 把手放在键盘上时，稍不注意就会移动错一位，这样，Q会变成W，输入一个错位后敲出的字符串，<br> 输出打字员本来想打的字符串。输入保证合法，如输入中不会出现 A 。<br>   样例输入：<br>   O S, GOMR YPFSU/<br>   样例输出：<br>   I AM FINE TODAY.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">char s[] =&#123;  &quot;`1234567890-=QWERTYUIOP[]\ASDFGHJKL;&apos;ZXCVBNM,./&quot; &#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">             int i ,c;</span><br><span class="line">             while((c=getchar())!=EOF)&#123;</span><br><span class="line">                   for (i=1; s[i]&amp;&amp; s[i]!=c;i++);//找错位之后的字符在常量表达表中的位置</span><br><span class="line">                   if(s[i])putchar(s[i-1]);//如果找到，则输出它的前一个字符</span><br><span class="line">                   else putchar(c);</span><br><span class="line">             &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" data-id="ck6qk04110004nwtfhxh8bdp5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/11/%E9%99%A4%E6%95%B0%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BF%A9%E4%B8%AA%E6%95%B0%E5%AD%97%E7%9A%84%E5%90%84%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84/" data-id="ck78qkmnh000p1ktf014e8ktp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -526,7 +537,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" rel="tag">高精度</a></li></ul>
     </div>
   </div>
 
@@ -536,7 +547,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a>
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" style="font-size: 10px;">高精度</a>
     </div>
   </div>
 
@@ -558,23 +569,23 @@
       <ul>
         
           <li>
+            <a href="/2020/02/26/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88/">排列与组合</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/26/%E5%A4%A7%E6%95%B0%E5%8A%A0%E6%B3%95/">大数加法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/26/%E4%B8%89%E8%89%B2%E7%90%83%E9%97%AE%E9%A2%98/">三色球问题 </a>
+          </li>
+        
+          <li>
             <a href="/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/">模拟法不模拟</a>
           </li>
         
           <li>
             <a href="/2020/02/17/C-%E7%9A%84string/">C++的string</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/03/%E5%9F%BA%E6%95%B0%E6%8E%92%E5%BA%8FOr%E8%B4%AA%E5%BF%83/">基数排序Or贪心</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/16/%E6%9C%89%E5%85%B3%E5%B0%BA%E5%8F%96%E6%B3%95%E7%9A%84%E6%B7%B1%E5%BA%A6%E6%80%9D%E8%80%83/">有关尺取法的深度思考</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/24/%E5%80%8D%E5%A2%9E%E7%9A%84%E6%80%9D%E6%83%B3/">倍增的思想</a>
           </li>
         
       </ul>

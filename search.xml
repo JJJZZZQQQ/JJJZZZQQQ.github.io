@@ -3,6 +3,66 @@
   
     
     <entry>
+      <title><![CDATA[排列与组合]]></title>
+      <url>/2020/02/26/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88/</url>
+      <content type="html"><![CDATA[<p>排列与组合是许多模拟题的中心思想，此文就讲解一下两者的实现。</p>
+<h3 id="排列"><a href="#排列" class="headerlink" title="排列"></a>排列</h3><p>设有a,b,c三个数，将其排列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">arr[0]=a;arr[1]=b;arr[2]=c;</span><br><span class="line">for(int i=0;i&lt;3;i++)</span><br><span class="line">   for(int j=0;j&lt;3;j++)</span><br><span class="line">   &#123;</span><br><span class="line">     if(arr[i]!=arr[j])</span><br><span class="line">         for(k=0;k&lt;3;k++)</span><br><span class="line">         &#123;</span><br><span class="line">             if(arr[i]!=arr[k]&amp;&amp;arr[j]!=arr[k])</span><br><span class="line">             sum++;    </span><br><span class="line">         &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h3><p>设有a,b,c三个数，将其组合。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">arr[0]=a;arr[1]=b;arr[2]=c;</span><br><span class="line">for(int i=0;i&lt;3;i++)</span><br><span class="line">  for(int j=j;j&lt;3;j++)</span><br><span class="line">       for(k=j;k&lt;3;k++)</span><br><span class="line">       &#123;</span><br><span class="line">           if(arr[i]!=arr[k]&amp;&amp;arr[j]!=arr[k])</span><br><span class="line">           sum++;    </span><br><span class="line">       &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>其中，组合与排列还可以是从N个数中选择M个进行排列与组合，则每次循环中循环变量（如i，j，k）的范围是0到N，而循环的层数由M控制，M等于几就有几层循环。 </p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[大数加法]]></title>
+      <url>/2020/02/26/%E5%A4%A7%E6%95%B0%E5%8A%A0%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p>题目描述：求两个不超过200位的非负整数的和。</p>
+<p>输入：有两行，每行是一个不超过200位的非负整数，没有多余的前导0。</p>
+<p>输出：一行，即相加后的结果。结果里不能有多余的前导0，即如果结果是342，那么就不能输出为0342。</p>
+<p>本题思路很简单，用数组模拟加法运算的过程，其中有几点可以有效的使代码更为清晰：</p>
+<p>1：将数字按位存入数组时，要倒着存入，如一个数为1234567，则存入数组时应为7,6,5,4,3,2,1。这样是为了方便两个数相加的时候每一位对准每一位，就算位数不同也无需额外考虑。</p>
+<p>2:当加法循环退出的时候，千万要确保此时的进位已经算进去了，所以我们将进位的值放到下一位里。</p>
+<p>3：去除前导0时只需从目前所在的这个位置（即进位所在的位置开始），每遇到一个0就往下一位，直到首位不为0为止。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">int a[201]=&#123;0&#125;;</span><br><span class="line">int b[201]=&#123;0&#125;;</span><br><span class="line">int c[202]=&#123;0&#125;;</span><br><span class="line">char s1[201];</span><br><span class="line">char s2[201];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    gets(s1);</span><br><span class="line">    gets(s2);</span><br><span class="line">    int i,jinwei=0;</span><br><span class="line">    int len1=strlen(s1);</span><br><span class="line">    int len2=strlen(s2);</span><br><span class="line">    for(i=1;i&lt;=len1;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i]=s1[len1-i]-48;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=1;i&lt;=len2;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        b[i]=s2[len2-i]-48;</span><br><span class="line">    &#125;</span><br><span class="line">    int max;</span><br><span class="line">    if(len1&gt;len2)max=len1;</span><br><span class="line">    else max=len2;</span><br><span class="line">    for(i=1;i&lt;=max;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c[i]=a[i]+b[i]+jinwei;</span><br><span class="line">        jinwei=c[i]/10;</span><br><span class="line">        c[i]%=10;</span><br><span class="line">    &#125;</span><br><span class="line">    c[i]=jinwei;</span><br><span class="line">    if(c[i]==0)i--;</span><br><span class="line">    for(;i&gt;=1;i--)</span><br><span class="line">    &#123;</span><br><span class="line">        printf(&quot;%d&quot;,c[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 高精度 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[三色球问题 ]]></title>
+      <url>/2020/02/26/%E4%B8%89%E8%89%B2%E7%90%83%E9%97%AE%E9%A2%98/</url>
+      <content type="html"><![CDATA[<p>题目：若一个口袋中放有a个红的,b个白的和c个黒的，问从中任取n个共有多少种不同的颜色搭配？<br>输入：<br>多组数据，每组一行，a,b,c,n,都不大于100</p>
+<p>输出：<br>每个答案一行<br>思路：此题由于数据规模较小，于是考虑暴力枚举，初次枚举采用的是三层循环，后发现时间会超出限制<br>经过思考，通过红色球数,白色球数,红色球数,n四个数之间的关系，可缩减一次循环。</p>
+<p>code：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a,b,c,n;</span><br><span class="line">    while(scanf(&quot;%d %d %d %d&quot;,&amp;a,&amp;b,&amp;c,&amp;n)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        int i,j,sum = 0;</span><br><span class="line">        for(i=0;i&lt;=a;i++)</span><br><span class="line">            for(j=0;j&lt;=b;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                if(n - i - j &lt; = c &amp;&amp; (n - i - j &gt; = 0))sum++;</span><br><span class="line">            &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;,sum);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[模拟法不模拟]]></title>
       <url>/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/</url>
       <content type="html"><![CDATA[<h1 id="拒绝傻瓜模拟"><a href="#拒绝傻瓜模拟" class="headerlink" title="拒绝傻瓜模拟"></a>拒绝傻瓜模拟</h1><p>发现自己对模拟这种最基础的解题方法使用的出了点问题，模拟的本意应是按题意直接编写程序，而我<br>却把模拟使用成了，从问题的起始，一直往后推到结束，这种思路在一些题上是正确的，<br>但是在一些题目上会发现中间的过程过于的复杂，用程序来模拟不现实，此时就应该考虑从大局上来思考<br>问题。</p>
