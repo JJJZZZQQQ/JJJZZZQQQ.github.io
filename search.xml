@@ -3,6 +3,30 @@
   
     
     <entry>
+      <title><![CDATA[高精度斐波拉契数列]]></title>
+      <url>/2020/03/06/%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E6%95%B0%E5%88%97/</url>
+      <content type="html"><![CDATA[<p>题目：洛谷P1255 数楼梯<br><br>楼梯有N阶，上楼可以一步上一阶，也可以一步上二阶。<br><br>编一个程序，计算共有多少种不同的走法。<br><br>输入格式：一个数字，楼梯数。<br><br>输出格式：走的方式几种。<br><br>输入<br>4<br><br>输出<br>5<br><br>说明/提示<br>60% N&lt;=50<br>100% N&lt;=5000)<br><br>思路：数楼梯问题其实就是斐波拉契数列的问题，一开始用int类型递推，对了40分，然后改用<br>longlong，对了50分。此后便意识到应该是一个高精度问题。<br><br>重点：<br>1：和普通的高精度加法不同，由于斐波拉契有初始值，即 第一项为1，第二项为2。故我们<br>将这2个数分别存入数组当中，就替代了高精度加法的存入一步。<br><br>2:计算过程中，由于两个数会越来越大，所以位数应该随之改变，才能每一次计算刚好将每一位都算完，而位数增加一位的条件应是此时是最高位且最高位的两数相加大于9，<br>需要进位时才让位数加1。<br><br>3:最后需要逆序输出，和高精度算法一致。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">///数据规模太大，longlong也不够，要使用高精度加法模板</span><br><span class="line">int a[5010]=&#123;0&#125;;</span><br><span class="line">int b[5010]=&#123;0&#125;;</span><br><span class="line">int c[5010]=&#123;0&#125;;</span><br><span class="line">int weishu=1;</span><br><span class="line">void fun(int n)</span><br><span class="line">&#123;</span><br><span class="line">    a[0]=1;</span><br><span class="line">    b[0]=2;</span><br><span class="line">    for(int j=3;j&lt;=n;j++)</span><br><span class="line">    &#123;</span><br><span class="line">    for(int i=0;i&lt;weishu;i++)&#123;</span><br><span class="line">        c[i]=c[i]+a[i]+b[i];</span><br><span class="line">        if(c[i]&gt;=10)&#123;</span><br><span class="line">                c[i+1]+=(c[i]/10);</span><br><span class="line">                c[i]%=10;</span><br><span class="line">                if(i==weishu-1)weishu++;///只有在i在最高位时位数需要加1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=0;i&lt;weishu;i++)a[i]=b[i];</span><br><span class="line">    for(int i=0;i&lt;weishu;i++)b[i]=c[i];</span><br><span class="line">    if(j!=n) memset(c,0,sizeof(c));//每一次算完后让c数组清0以遍下次运算最后一次除外</span><br><span class="line">    &#125;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    if(n&lt;3)cout&lt;&lt;n;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        fun(n);</span><br><span class="line">        while(c[weishu]==0)weishu--;</span><br><span class="line">        //cout&lt;&lt;weishu&lt;&lt;endl;</span><br><span class="line">        for(int i=weishu;i&gt;=0;i--)</span><br><span class="line">            cout&lt;&lt;c[i];</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 高精度 递推 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[归并排序的应用]]></title>
+      <url>/2020/03/05/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+      <content type="html"></content>
+      
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[排列与组合]]></title>
       <url>/2020/02/26/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88/</url>
       <content type="html"><![CDATA[<p>排列与组合是许多模拟题的中心思想，此文就讲解一下两者的实现。</p>

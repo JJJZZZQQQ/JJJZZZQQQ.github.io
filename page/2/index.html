@@ -61,6 +61,86 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-由于未初始化导致的本地运行和oj运行答案不一致" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/" class="article-date">
+  <time datetime="2019-11-19T09:08:22.732Z" itemprop="datePublished">2019-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/">由于未初始化导致的本地运行和oj运行答案不一致</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘[由于未初始化导致的本地运行和oj运行答案不一致]’<br>date: 2019-11-19 17:08:22<br>tags: 算法</p>
+<p>题目：本题要求实现一个函数，用下列公式求cos的近似值，精确到最后一项的绝对值小于e：<br>cos(x)=x0/0!−x2/2!+x4/4!−x6/6!+⋯<br>函数接口定义：<br>double funcos( double e, double x );<br>其中用户传入的参数为误差上限e和自变量x；函数funcos应返回用给定公式计算出来、并且满足误差要求的cos的近似值。输入输出均在双精度范围内。<br>错误代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">double funcos( double e, double x )</span><br><span class="line">&#123;</span><br><span class="line">    double s=0,t;</span><br><span class="line">    int i=0,j,flag=1;</span><br><span class="line">    while(fabs(t)&gt;=e)</span><br><span class="line">    &#123;</span><br><span class="line">        t=pow(x,i);</span><br><span class="line">        for(j=1;j&lt;=i;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            t/=j;</span><br><span class="line">        &#125;</span><br><span class="line">        s+=t*flag;</span><br><span class="line">        flag=-flag;</span><br><span class="line">        i+=2;</span><br><span class="line">    &#125;</span><br><span class="line">    return s;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    double e, x;</span><br><span class="line"></span><br><span class="line">    scanf(&quot;%lf %lf&quot;, &amp;e, &amp;x);</span><br><span class="line">    printf(&quot;cos(%.2f) = %.6f\n&quot;, x, funcos(e, x));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正确代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">double funcos( double e, double x )</span><br><span class="line">&#123;</span><br><span class="line">    double s=0,t=0;</span><br><span class="line">    int i=0,j,flag=1;</span><br><span class="line">    while(fabs(t)&gt;=e)</span><br><span class="line">    &#123;</span><br><span class="line">        t=pow(x,i);</span><br><span class="line">        for(j=1;j&lt;=i;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            t/=j;</span><br><span class="line">        &#125;</span><br><span class="line">        s+=t*flag;</span><br><span class="line">        flag=-flag;</span><br><span class="line">        i+=2;</span><br><span class="line">    &#125;</span><br><span class="line">    return s;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    double e, x;</span><br><span class="line"></span><br><span class="line">    scanf(&quot;%lf %lf&quot;, &amp;e, &amp;x);</span><br><span class="line">    printf(&quot;cos(%.2f) = %.6f\n&quot;, x, funcos(e, x));</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分析：第一次错误代码再本地运行时能输出正确答案，当在oj上运行时却输出0.000000.<br>而第二次与第一次的区别仅仅是将t赋值为0，第一次未赋值，在本地能输出是因为巧合，刚好t的值<br>能进入循环，而在oj上却没有这种巧合，所以直接连循环都没有进入，直接输出s的初始值0.00000。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/19/%E7%94%B1%E4%BA%8E%E6%9C%AA%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AF%BC%E8%87%B4%E7%9A%84%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C%E5%92%8Coj%E8%BF%90%E8%A1%8C%E7%AD%94%E6%A1%88%E4%B8%8D%E4%B8%80%E8%87%B4/" data-id="ck7flaomf000qsgtf2nx26rda" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-除数，判断俩个数字的各个数字是否有重复的" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/11/%E9%99%A4%E6%95%B0%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BF%A9%E4%B8%AA%E6%95%B0%E5%AD%97%E7%9A%84%E5%90%84%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84/" class="article-date">
+  <time datetime="2019-11-11T12:39:26.343Z" itemprop="datePublished">2019-11-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/11/%E9%99%A4%E6%95%B0%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BF%A9%E4%B8%AA%E6%95%B0%E5%AD%97%E7%9A%84%E5%90%84%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84/">除数，判断俩个数字的各个数字是否有重复的</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘[除数，判断俩个数字的各个数字是否有重复的]’<br>date: 2019-11-11 20:39:26<br>tags: 算法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">int is(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    int a[10];</span><br><span class="line">    int i=0,s=0;</span><br><span class="line">    for(i=0;i&lt;10;i++)a[i]=0;//给数组初始化数值，很重要，一开始没有对就是因为未初始化。</span><br><span class="line">    for(i=0;i&lt;5;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[x%10]=1;</span><br><span class="line">        a[y%10]=1;</span><br><span class="line">        x/=10;y/=10;</span><br><span class="line">    &#125;</span><br><span class="line">    for(i=0;i&lt;10;i++)s+=a[i];</span><br><span class="line">    if(s==10)return 1;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line"></span><br><span class="line">    scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">    for(int i=1234;i&lt;98765;i++)&#123;</span><br><span class="line">        if(is(i,i*n)==1)printf(&quot;%d/%d=%d\n&quot;,i*n,i,n);</span><br><span class="line">        if(i*n&gt;100000)break;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/11/%E9%99%A4%E6%95%B0%EF%BC%8C%E5%88%A4%E6%96%AD%E4%BF%A9%E4%B8%AA%E6%95%B0%E5%AD%97%E7%9A%84%E5%90%84%E4%B8%AA%E6%95%B0%E5%AD%97%E6%98%AF%E5%90%A6%E6%9C%89%E9%87%8D%E5%A4%8D%E7%9A%84/" data-id="ck7flaomf000ssgtfat1u3ick" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-有关字符串比较函数的拓展" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/" class="article-date">
@@ -90,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/" data-id="ck78qkmn5000j1ktf121wdpt4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/10/%E6%9C%89%E5%85%B3%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%8B%93%E5%B1%95/" data-id="ck7flaom9000ksgtfb86548rn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -130,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/" data-id="ck78qkmmr000d1ktffkzlflod" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/08/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E7%BB%84%E8%BE%93%E5%85%A5%E4%B8%94%E6%AF%8F%E4%B8%AA%E8%BE%93%E5%85%A5%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E8%BE%93%E5%87%BA%E7%9A%84%E7%BB%93%E6%9E%9C/" data-id="ck7flaolt000bsgtfgxc3346z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" data-id="ck78qkmmp000b1ktfdk2h4se8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/04/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E5%85%B3%E9%A2%98%E7%9B%AE/" data-id="ck7flaolt000esgtf4s0sfggh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -210,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/31/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" data-id="ck78qkmnc000m1ktfhwb0g268" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/31/%E6%B0%B4%E4%BB%99%E8%8A%B1%E6%95%B0/" data-id="ck7flaomf000msgtf22hdhkak" class="article-share-link">Share</a>
       
       
     </footer>
@@ -248,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/30/%E2%80%9C%E7%AC%AC%E4%B8%80%E6%9D%A1%E2%80%9D/" data-id="ck78qkmme00051ktf552s3fsx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/30/%E2%80%9C%E7%AC%AC%E4%B8%80%E6%9D%A1%E2%80%9D/" data-id="ck7flaole0004sgtf03ijhy3p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -297,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/30/hello-world/" data-id="ck78qkmm700031ktf2qlx8hh4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/30/hello-world/" data-id="ck7flaole0001sgtf2643h4qk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -325,7 +405,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" rel="tag">高精度</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" rel="tag">高精度</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6-%E9%80%92%E6%8E%A8/" rel="tag">高精度 递推</a></li></ul>
     </div>
   </div>
 
@@ -335,7 +415,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" style="font-size: 10px;">高精度</a>
+      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 20px;">算法</a> <a href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" style="font-size: 10px;">高精度</a> <a href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6-%E9%80%92%E6%8E%A8/" style="font-size: 10px;">高精度 递推</a>
     </div>
   </div>
 
@@ -344,7 +424,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li></ul>
     </div>
   </div>
 
@@ -357,6 +437,14 @@
       <ul>
         
           <li>
+            <a href="/2020/03/06/%E9%AB%98%E7%B2%BE%E5%BA%A6%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E6%95%B0%E5%88%97/">高精度斐波拉契数列</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/05/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E7%9A%84%E5%BA%94%E7%94%A8/">归并排序的应用</a>
+          </li>
+        
+          <li>
             <a href="/2020/02/26/%E6%8E%92%E5%88%97%E4%B8%8E%E7%BB%84%E5%90%88/">排列与组合</a>
           </li>
         
@@ -366,14 +454,6 @@
         
           <li>
             <a href="/2020/02/26/%E4%B8%89%E8%89%B2%E7%90%83%E9%97%AE%E9%A2%98/">三色球问题 </a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/17/%E6%A8%A1%E6%8B%9F%E6%B3%95%E4%B8%8D%E6%A8%A1%E6%8B%9F/">模拟法不模拟</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/17/C-%E7%9A%84string/">C++的string</a>
           </li>
         
       </ul>
